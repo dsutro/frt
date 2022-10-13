@@ -2,7 +2,6 @@
 
 <head>
 
-    <title>Data Analytics Ireland</title></head>
 <body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
@@ -15,6 +14,22 @@
         $("span").text("no");
     })
 </script>
+
+    <input type="file" id="upload" />
+    <audio id="audio" controls>
+      <source src="" id="src" />
+    </audio>
+
+<script>
+    function handleFiles(event) {
+    var files = event.target.files;
+    $("#src").attr("src", URL.createObjectURL(files[0]));
+    document.getElementById("audio").load();
+    }
+
+    document.getElementById("upload").addEventListener("change", handleFiles, false);
+</script>
+
 <p><span>0</span></p>
 
 <script>
