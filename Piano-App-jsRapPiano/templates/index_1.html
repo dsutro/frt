@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Demo</title>
+<link rel="stylesheet" href="{{ url_for('static',filename='jsRapPiano.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static',filename='index.css') }}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="{{ url_for('static',filename='jsRapPiano.js') }}"></script>
+<script>
+
+$(document).ready(function(){
+$('#demo1').jsRapPiano({
+	octave:1,
+	octaves:3,
+	onClick:function(index,frequency){
+		$('#frequency').text(index + '-' + Math.round(frequency) + ' Hz');
+	}
+});
+});
+
+</script>
+</head>
+<body>
+<div id="divMain">
+<div id="demo1" ></div>
+<div id="frequency" ></div>
+</div>
+</body>
+</html>
