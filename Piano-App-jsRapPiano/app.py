@@ -8,7 +8,7 @@ app = Flask(__name__)
 arr = []
 @app.route('/')
 def index():
-    return render_template('index_1.html')
+    return render_template('index.html')
 
 @app.route('/test', methods=['POST'])
 def test():

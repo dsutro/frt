@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{{ url_for('static',filename='jsRapPiano.css') }}" />
 <link rel="stylesheet" href="{{ url_for('static',filename='index.css') }}" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="jsRapPiano.js"></script>
+<script src="{{ url_for('static',filename='jsRapPiano.js') }}"></script>
 <script>
 
 $(document).ready(function(){
