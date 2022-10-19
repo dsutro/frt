@@ -6,8 +6,8 @@ $(window).resize(function () {
 
 function myfunction(x) {
 
-    const firstname = x;
-    const dict_values = {firstname} //Pass the javascript variables to a dictionary.
+    const data = x;
+    const dict_values = {data} //Pass the javascript variables to a dictionary.
     const s = JSON.stringify(dict_values); // Stringify converts a JavaScript object or value to a JSON string
     $.ajax({
         url:"/test",
@@ -60,10 +60,16 @@ function myfunction(x) {
 				$('.major,.minor', this).bind({
 					mousedown: function (e) {
 						let i = $(this).prop('index');
-						let f = base.opt.tuning * Math.pow(2, (i - 69) / 12);
+						let f = base.opt.tuning*2;
 						base.audioContext.resume();
 						myfunction(i);
-						base.PlaySound(f);
+						fetch('/sound_feed')
+						  .then(response => response.json())
+						  .then(data => base.PlaySound(f*data["sound"]))
+
+
+
+
 						if (base.opt.onClick)
 							base.opt.onClick.call(base, i, f);
 					}
