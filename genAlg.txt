@@ -1,0 +1,32 @@
+
+// Create an empty genAlg model
+ga = mai.genalg.GeneticAlgorithm()
+
+random_population()
+	create random genotypes
+
+genotype_to_phenotype()
+
+
+fitness_func(phenotype)
+	// find parent using fitness fn
+	sum(genotype/len(genotype)) ??
+	parents = []
+	check how close each phenotype is to the target sound
+	append to parents
+
+
+crossover_point()
+	// get crossover pt.
+
+get_child()
+	// use fitness function to find both parents
+	??? fitness vs crossover
+	child = crossover(parent1, parent2)
+	return child
+
+put all the above functions in a loop till we almost reach target sound
+
+
+
+
