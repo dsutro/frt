@@ -1,7 +1,9 @@
-body{background-color:grey;}
+body{background-color:purple;}
 #divMain{
-margin:auto;		
+margin:auto;
 width:80%;
+bottom: 0;
+position: absolute;
 }
 /* #divGitHub{
 top:0px;

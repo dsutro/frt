@@ -6,6 +6,7 @@ white-space:nowrap;
 display:inline-block;
 height:100%;
 position:relative;
+left: 250px;
 margin:0 2px;
 cursor:-webkit-grab;
 cursor:grab;
@@ -18,6 +19,23 @@ display: block;
 height:100%;
 position:relative;
 border-radius:8px;
+z-index: 1;
+}
+.maLetter{
+    /* display: flex; */
+    position: absolute;
+    bottom: 0px;
+    right: 40%;
+    -webkit-text-fill-color: black;
+    z-index: 3;
+}
+.miLetter{
+    /* display: flex; */
+    position: absolute;
+    bottom: 0px;
+    right: 40%;
+    -webkit-text-fill-color: white;
+    z-index: 3;
 }
 .divKey .major:active{
 box-shadow:inset 0px 0px 8px #000;
@@ -35,7 +53,7 @@ position:absolute;
 right:-39%;
 top:0px;
 width:60%;
-z-index:1;
+z-index:2;
 }
 .divKey .minor:active{
 border-bottom-width:3px;
