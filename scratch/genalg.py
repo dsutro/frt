@@ -3,6 +3,7 @@ import functools
 import matplotlib.pyplot as plt
 import numpy as np
 import copy
+from fitness import fitness, calculate_fingerprints
 
 # default functions ----------------------------------------------------------------------
 
@@ -15,20 +16,6 @@ def to_phenotype(genotype):
     """Trivial mapping genotype -> phenotype (for now...)"""
 
     return genotype
-
-def fitness_func(individual):
-    """Evaluate the fitness of an individual using hamming
-    distance to [1,1, ... , 1]. returns value within [0,1]
-    """
-
-    # ideal vector
-    target = [1] * len(individual)
-
-    # hamming distance to ideal vector
-    distance = sum([abs(x - y) for (x,y) in zip(individual, target)]) / float(len(target))
-
-    # invert for fitness
-    return 1 - distance
 
 def to_weight(fitness, m=100, b=1):
     """Convert from fitness score to probability weighting"""
@@ -70,15 +57,22 @@ def mutate(genotype, mutation_prob=0.01, inbreeding_prob=0.5, verbose=True):
 class GeneticAlgorithm:
     """A very simple Genetic Algorithm."""
 
-    def __init__(self):
+    def __init__(self, target_fname):
 
         # initialize default functions
         self.random_individual = random_individual
         self.to_phenotype = to_phenotype
-        self.fitness_func = fitness_func
+        self.fitness_func = fitness
         self.to_weight = to_weight
         self.reproduce = reproduce
         self.mutate = mutate
+        self.target_fname = target_fname
+        self.target_fingerprint = None
+
+        try:
+            self.target_fingerprint = calculate_fingerprints(self.target_fname)
+        except Exception as e:
+            print(f'Genetic Algorithm initialization failed due to : {e}')
 
     def initialize_population(self, population_size=10):
         """Initialize the population."""
@@ -105,7 +99,7 @@ class GeneticAlgorithm:
         for i in range(iters):
 
             # evaluate fitness over the entire population
-            self.fitness = [(self.fitness_func(self.to_phenotype(individual)), individual)
+            self.fitness = [(self.fitness_func(self.to_phenotype(individual), self.target_fingerprint), individual)
                        for individual in self.population]
 
             # construct mating pool of probabilities weighted by fitness score

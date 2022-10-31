@@ -1,25 +1,38 @@
 import genalg
-from fitness import _correlate
+from fitness import fitness
 # imports
-import mai.synths
-import mai.musifuncs as mf
-import IPython.display
+import synths
+import musicfuncs as mf
 import time
 import matplotlib.pyplot as plt
 import random
 import math
 import librosa
 import argparse
+import numpy as np
+from scipy.io.wavfile import write
+import soundfile as sf
+
+
+SR = 44100
 
 def initialize():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-t ", "--target-file", help="target file")
-    args = parser.parse_args()
-  
-    TARGET_FILE = args.target_file if args.target_file else None
-    if not TARGET_FILE:
-      raise Exception("Target files not specified.")
-    return TARGET_FILE
+  """ takes user input """
+  parser = argparse.ArgumentParser()
+  parser.add_argument("-t ", "--target-file", help="target file")
+  args = parser.parse_args()
+
+  target_file = args.target_file if args.target_file else None
+  if not target_file:
+    raise Exception("Target files not specified.")
+
+  # create a genetic algorithm object
+  ga = genalg.GeneticAlgorithm(target_file)
+  ga.to_phenotype = to_phenotype
+  ga.random_individual = random_individual
+  ga.fitness_func = fitness
+
+  return ga
 
 def random_individual():
   """Generate random genotype 6 values in range [0,1]."""
@@ -42,61 +55,27 @@ def to_phenotype(genotype):
   release   = mf.scale(genotype[5], 0.01, 5, kind='exp')   # release
   
   # synthesize audio using FM synthesis
-  y = mai.synths.fm(carrier, modulator, index1, index2, attack, release)
-  
-  return y
+  y = synths.fm(carrier, modulator, index1, index2, attack, release)
 
-euc_fnc = lambda x, y: math.sqrt(x**2 - y**2)
+  # scaled = np.int16(y / np.max(np.abs(y)) * 32767)
+  # write('test.wav', SR, scaled)
 
-def fitness_fnc(target_audio, synth_audio):
-  target_features = mai.listen.spectral_features(target_audio)
-  synth_features = mai.listen.spectral_features(synth_audio)
+  sf.write('test.wav', y, SR, 'PCM_24')
 
-  score = 0
-  for key in target_features.keys():
-    score += euc_fnc(target_features[key], synth_features[key])
+  return 'test.wav'
 
-  return score
+# def fitness_fnc_euc(target_audio, synth_audio):
+#   euc_fnc = lambda x, y: math.sqrt(x**2 - y**2)
+#   target_features = mai.listen.spectral_features(target_audio)
+#   synth_features = mai.listen.spectral_features(synth_audio)
+
+#   score = 0
+#   for key in target_features.keys():
+#     score += euc_fnc(target_features[key], synth_features[key])
+
+#   return score
 
 if __name__ == '__main__':
-    TARGET_FILE = initialize()
+  ga = initialize()
 
-    print("initializing ga")
-    # create a genetic algorithm object
-    ga = mai.genalg.GeneticAlgorithm()
-
-    # overwrite default function 
-    ga.to_phenotype = to_phenotype
-
-    # overwrite default function 
-    ga.random_individual = random_individual
-
-    # overwrite fitness func
-    ga.fitness_func = _correlate
-
-    # initialize random population
-    ga.initialize_population(population_size=12)
-
-    print('loading audio')
-    filename = TARGET_FILE
-    target_audio, sr = librosa.load(filename, sr=None)
-
-    # first gen
-    for i,genotype in enumerate(ga.population):
-
-        print('sounding individual {0}'.format(i))
-            
-        # convert to phenotype
-        y = ga.to_phenotype(genotype)
-            
-        # play it
-        # d = IPython.display.Audio(y, rate=44100, autoplay=False)
-        # d = IPython.display.Audio(y, rate=sr, autoplay=False)
-        # IPython.display.display(d)
-
-        ga.fitness[i][0] = _correlate(target_audio, y)
-        
-    # evolve next generation
-    ga.evolve_once(mutation_prob=0.1)
-
-    print(ga.fitness)
+  pop = ga.evolve()

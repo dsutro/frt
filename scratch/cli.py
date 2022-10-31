@@ -1,7 +1,12 @@
 #!/usr/bin/python3
 # compare.py
 import argparse
-from fitness import _correlate
+from fitness import correlate
+from listen import spectrogram
+import librosa
+import matplotlib.pyplot as plt
+import librosa.display
+
 
 def initialize():
     parser = argparse.ArgumentParser()
@@ -17,4 +22,26 @@ def initialize():
   
 if __name__ == "__main__":
     SOURCE_FILE, TARGET_FILE = initialize()
-    _correlate(SOURCE_FILE, TARGET_FILE)
+    correlate(SOURCE_FILE, TARGET_FILE)
+
+    # print spectrograms
+    # compute spectrogram
+    y, sr = librosa.load(TARGET_FILE, sr=None)
+    T = spectrogram(y)
+
+    # plot spectrogram
+    plt.figure(figsize=(12,3))
+    librosa.display.specshow(T, x_axis='time', y_axis='log', sr=sr)
+    plt.title('Target Spectrogram')
+    plt.show()
+
+    y, sr = librosa.load(SOURCE_FILE, sr=None)
+    S = spectrogram(y)
+
+    # plot spectrogram
+    plt.figure(figsize=(12,3))
+    librosa.display.specshow(S, x_axis='time', y_axis='log', sr=sr)
+    plt.title('Source Spectrogram')
+    plt.show()
+
+    

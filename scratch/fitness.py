@@ -4,17 +4,19 @@ import subprocess
 import numpy
 import os
 
+
 # seconds to sample audio file for
 sample_time = 5
 # number of points to scan cross correlation over
 span = 11
-# step size (in points) of cross correlation
+# step size  of cross correlation
 step = 1
+
 # minimum number of points that must overlap in cross correlation
-# exception is raised if this cannot be met
-min_overlap = 1
-# report match when cross correlation has a peak exceeding threshold
-threshold = 0.5
+MIN_OVERLAP = 1
+
+# report match when cross correlation has a peak exceeding THRESHOLD
+THRESHOLD = 0.5
 
 # calculate fingerprint
 # Generate file.mp3.fpcalc by "fpcalc -raw -length 500 file.mp3"
@@ -52,8 +54,6 @@ def correlation(listx, listy):
   
 # return cross correlation, with listy offset from listx
 def cross_correlation(listx, listy, offset):
-    print(f'listx {listy}')
-    print(offset)
     if offset > 0:
         listx = listx[offset:]
         listy = listy[:len(listx)]
@@ -61,10 +61,10 @@ def cross_correlation(listx, listy, offset):
         offset = -offset
         listy = listy[offset:]
         listx = listx[:len(listy)]
-    if min(len(listx), len(listy)) < min_overlap:
+    if min(len(listx), len(listy)) < MIN_OVERLAP:
         # Error checking in main program should prevent us from ever being
         # able to get here.
-        print(f"Min overlap ({min_overlap}) not met by {(lambda: 'Target', lambda: 'Source')[min(len(listx), len(listy)) == len(listx)]()}")
+        print(f"Min overlap ({MIN_OVERLAP}) not met by {(lambda: 'Target', lambda: 'Source')[min(len(listx), len(listy)) == len(listx)]()}")
         return 
     #raise Exception('Overlap too small: %i' % min(len(listx), len(listy)))
     return correlation(listx, listy)
@@ -97,18 +97,30 @@ def get_max_corr(corr, source, target):
     max_corr_offset = -span + max_corr_index * step
     #print("max_corr_index = ", max_corr_index, "max_corr_offset = ", max_corr_offset)
     # report matches
-    if corr[max_corr_index] > threshold:
+    if corr[max_corr_index] > THRESHOLD:
         print("Source: %s" % (source))
         print("Target: %s" % (target))
         print('Match with correlation of %.2f%% at offset %i'
              % (corr[max_corr_index] * 100.0, max_corr_offset))
-        return corr[max_corr_index]
+        return corr[max_corr_index], max_corr_offset
 
-def _correlate(source, target):
+def fitness(source, fingerprint_target):
+    try:
+        fingerprint_source = calculate_fingerprints(source)
+
+        corr = compare(fingerprint_source, fingerprint_target, span, step)
+        max_corr, max_offset = get_max_corr(corr, source, target)
+        return max_corr
+    except Exception as e:
+        print(f'fitness calc failed due {e}')
+        if e.find('Command') != 1:
+            exit()
+    return 0 
+
+def correlate(source, target):
     fingerprint_source = calculate_fingerprints(source)
     fingerprint_target = calculate_fingerprints(target)
 
-    print(fingerprint_source)
     corr = compare(fingerprint_source, fingerprint_target, span, step)
-    max_corr_offset = get_max_corr(corr, source, target)
-    print(max_corr_offset)
+    max_corr, max_offset = get_max_corr(corr, source, target)
+    return max_corr
