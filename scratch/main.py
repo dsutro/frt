@@ -57,10 +57,11 @@ def to_phenotype(genotype):
   # synthesize audio using FM synthesis
   y = synths.fm(carrier, modulator, index1, index2, attack, release)
 
+  data = np.random.uniform(-1, 1, 99600)
   # scaled = np.int16(y / np.max(np.abs(y)) * 32767)
   # write('test.wav', SR, scaled)
 
-  sf.write('test.wav', y, SR, 'PCM_24')
+  sf.write('test.wav', data, SR, 'PCM_24')
 
   return 'test.wav'
 
