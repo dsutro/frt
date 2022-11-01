@@ -3,24 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Demo</title>
-<link rel="stylesheet" href="{{ url_for('static',filename='jsRapPiano.css') }}" />
+<script src="https://unpkg.com/tone"></script>
+<link rel="stylesheet" href="{{ url_for('static',filename='piano.css') }}" />
 <link rel="stylesheet" href="{{ url_for('static',filename='index.css') }}" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="{{ url_for('static',filename='jsRapPiano.js') }}"></script>
 <script>
-
-$(document).ready(function(){
-$('#demo1').jsRapPiano({
-	octave:1,
-	octaves:1,
-	onClick:function(index,frequency){
-		$('#frequency').text(index + '-' + Math.round(frequency) + ' Hz');
-	}
-});
-});
 
 </script>
 </head>
+
+</html>
 <body>
 <div id="divMain">
 <div id="demo1" ></div>
@@ -31,4 +23,31 @@ $('#demo1').jsRapPiano({
          <input type = "file" name = "file" />
          <input type = "submit"/>
 </body>
+
+<div id="piano">
+	<div data-note="C4" id class="white-key">A</div>
+	<div data-note="C#4" class="black-key">W</div>
+	<div data-note="D4" class="white-key a" >S</div>
+	<div data-note="D#4" class="black-key">E</div>
+	<div data-note="E4" class="white-key a">D</div>
+	<div data-note="F4" class="white-key">F</div>
+	<div data-note="F#4" class="black-key">T</div>
+	<div data-note="G4" class="white-key a">G</div>
+	<div data-note="G#4" class="black-key">Y</div>
+	<div data-note="A4" class="white-key a">H</div>
+	<div data-note="A#4" class="black-key">U</div>
+	<div data-note="B4" class="white-key a">J</div>
+	<div data-note="C5" class="white-key">K</div>
+	<div data-note="C#5" class="black-key">O</div>
+	<div data-note="D5" class="white-key a">L</div>
+	<div data-note="D#5" class="black-key">P</div>
+	<div data-note="E5" class="white-key a">;</div>
+	<div data-note="F5" class="white-key">'</div>
+	<div id="oct-down" class="oct-key">Z</div>
+	<div id="oct-up" class="oct-key">X</div>
+	<li>Octave: <span id="dis-user-oct">3</span></li>
+</div>
+
+  <script src="{{ url_for('static',filename='jsRapPiano.js') }}"></script>
+
 </html>
