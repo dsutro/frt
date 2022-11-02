@@ -32,7 +32,7 @@ div .spacing{
      padding-bottom: 10px;
      font-weight: bold;
 }
- div :active,
+ .white-key:active,
  div .white-key.active{
     background: rgb(226, 226, 226);
 }
@@ -61,7 +61,7 @@ div .spacing{
     margin: 0 0 0 -45px;
     box-shadow:inset 0px 0px 8px #000;
 }
-div :active,
+.black-key:active,
 div .black-key.active{
     background: rgb(79, 79, 79);
 } 
@@ -84,7 +84,7 @@ div .oct-key{
     padding-bottom: 10px;
     font-weight: bold;
 }
-div :active,
+.oct-key:active,
 div .oct-key.active{
     background: #b8a734;
 }

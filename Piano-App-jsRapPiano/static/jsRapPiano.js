@@ -1,5 +1,15 @@
 
-const synth = new Tone.FMSynth();
+const synth = new Tone.FMSynth({
+  envelope: {
+    attack: 0.01,
+    decay: 2,
+    release: 1000
+  },
+  modulationEnvelope: {
+    attack: 0.5,
+    release: 200
+  }
+});
 // Set the tone to sine
 synth.oscillator.type = "triangle8";
 // connect it to the master output (your speakers)
@@ -14,9 +24,16 @@ let note = "C"
 note+=userOctave
 console.log(note);
 
+function calculateCorrectNote(user_input){
+  let last_char = user_input[user_input.length-1];
+  let correct_octave=userOctave+parseInt(last_char);
+  let correct_note = user_input.replace(/.$/,correct_octave);
+  console.log(correct_note);
+  return correct_note;
+}
+
 piano.addEventListener("mousedown", e => {
   // fires off a note continously until trigger is released
-	synth.triggerAttack(e.target.dataset.note);
 	if(e.target.getAttribute('id') === 'z'){
 		if (userOctave > 1){
 			userOctave--;
@@ -29,7 +46,8 @@ piano.addEventListener("mousedown", e => {
 		}
 		$('#dis-user-oct').html(userOctave);
 	}
-  	//sampler.triggerAttack(e.target.dataset.note);
+	let correct_note = calculateCorrectNote(e.target.dataset.note);
+	synth.triggerAttack(correct_note);
 });
 
 piano.addEventListener("mouseup", e => {
@@ -44,58 +62,58 @@ document.addEventListener("keydown", e => {
   switch (e.key) {
     case "a":
 	  	document.getElementById('a').classList.add("active");
-      	return synth.triggerAttack(note);
+      	return synth.triggerAttack(calculateCorrectNote("C0"));
     case "w":
 	  	document.getElementById('w').classList.add("active");
-      	return synth.triggerAttack("C#4");
+      	return synth.triggerAttack(calculateCorrectNote("C#0"));
     case "s":
 	  	document.getElementById('s').classList.add("active");
-      	return synth.triggerAttack("D4");
+      	return synth.triggerAttack(calculateCorrectNote("D0"));
     case "e":
 	  	document.getElementById('e').classList.add("active");
-      	return synth.triggerAttack("D#4");
+      	return synth.triggerAttack(calculateCorrectNote("D#0"));
     case "d":
 	  	document.getElementById('d').classList.add("active");
-      	return synth.triggerAttack("E4");
+      	return synth.triggerAttack(calculateCorrectNote("E0"));
     case "f":
 	  	document.getElementById('f').classList.add("active");
-      	return synth.triggerAttack("F4");
+      	return synth.triggerAttack(calculateCorrectNote("F0"));
     case "t":
 	  	document.getElementById('t').classList.add("active");
-      	return synth.triggerAttack("F#4");
+      	return synth.triggerAttack(calculateCorrectNote("F#0"));
     case "g":
 	  	document.getElementById('g').classList.add("active");
-      	return synth.triggerAttack("G4");
+      	return synth.triggerAttack(calculateCorrectNote("G0"));
     case "y":
 	  	document.getElementById('y').classList.add("active");
-      	return synth.triggerAttack("G#4");
+      	return synth.triggerAttack(calculateCorrectNote("G#0"));
     case "h":
 	  	document.getElementById('h').classList.add("active");
-      	return synth.triggerAttack("A4");
+      	return synth.triggerAttack(calculateCorrectNote("A0"));
     case "u":
 	  	document.getElementById('u').classList.add("active");
-      	return synth.triggerAttack("A#4");
+      	return synth.triggerAttack(calculateCorrectNote("A#0"));
     case "j":
 	  	document.getElementById('j').classList.add("active");
-      	return synth.triggerAttack("B4");
+      	return synth.triggerAttack(calculateCorrectNote("B0"));
     case "k":
 	  	document.getElementById('k').classList.add("active");
-      	return synth.triggerAttack("C5");
+      	return synth.triggerAttack(calculateCorrectNote("C1"));
     case "o":
 	  	document.getElementById('o').classList.add("active");
-      	return synth.triggerAttack("C#5");
+      	return synth.triggerAttack(calculateCorrectNote("C#1"));
     case "l":
 	  	document.getElementById('l').classList.add("active");
-      	return synth.triggerAttack("D5");
+      	return synth.triggerAttack(calculateCorrectNote("D1"));
     case "p":
 	  	document.getElementById('p').classList.add("active");
-      	return synth.triggerAttack("D#5");
+      	return synth.triggerAttack(calculateCorrectNote("D#1"));
     case ";":
 	  	document.getElementById(';').classList.add("active");
-      	return synth.triggerAttack("E5");
+      	return synth.triggerAttack(calculateCorrectNote("E1"));
     case "'":
 	  	document.getElementById("'").classList.add("active");
-      	return synth.triggerAttack("F5");
+      	return synth.triggerAttack(calculateCorrectNote("F1"));
 	case "z":
 		document.getElementById("z").classList.add("active");
 		if (userOctave > 1){
@@ -119,6 +137,7 @@ document.addEventListener("keyup", e => {
   switch (e.key) {
     case "a":
 		document.getElementById('a').classList.remove("active");
+    
     case "w":
 		document.getElementById('w').classList.remove("active");
     case "s":
