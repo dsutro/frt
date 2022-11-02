@@ -3,6 +3,7 @@ import functools
 import matplotlib.pyplot as plt
 import numpy as np
 import copy
+from listen import spectral_features
 from fitness import fitness, calculate_fingerprints
 
 # default functions ----------------------------------------------------------------------
@@ -68,9 +69,17 @@ class GeneticAlgorithm:
         self.mutate = mutate
         self.target_fname = target_fname
         self.target_fingerprint = None
+        self.target_features = None
 
+        # try to fingerprint target
+        # try:
+        #     self.target_fingerprint = calculate_fingerprints(self.target_fname)
+        # except Exception as e:
+        #     print(f'Genetic Algorithm initialization failed due to : {e}')
+
+        # try to get target features
         try:
-            self.target_fingerprint = calculate_fingerprints(self.target_fname)
+            self.target_features = spectral_features(target_fname)
         except Exception as e:
             print(f'Genetic Algorithm initialization failed due to : {e}')
 
@@ -92,15 +101,28 @@ class GeneticAlgorithm:
 
         # initialize the population
         if init_pop or self.population == None:
+            self.population_size = population_size
             self.population = [self.random_individual() for i in range(population_size)]
             self.generations = [copy.copy(self.population)]
 
         # loop iters times
         for i in range(iters):
 
-            # evaluate fitness over the entire population
-            self.fitness = [(self.fitness_func(self.to_phenotype(individual), self.target_fingerprint), individual)
+            # evaluate fitness over the entire population (fingerprinting fitness)
+            # self.fitness = [(self.fitness_func(self.to_phenotype(individual), self.target_fingerprint), individual)
+            #            for individual in self.population]
+
+            # spectral features fitness
+            self.fitness = [(self.fitness_func(self.to_phenotype(individual), self.target_features), individual)
                        for individual in self.population]
+
+            print(type(self.fitness))
+            print(self.fitness)
+
+            # adjust fitness (when using spectral features)
+            max_fitness = max([self.fitness[i][0] for i in range(self.population_size)])
+            for i in range(self.population_size):
+                self.fitness[i][0] = 1 - (self.fitness[i][0] / max_fitness)
 
             # construct mating pool of probabilities weighted by fitness score
             mating_pool = functools.reduce(lambda x,y: x+y, [[individual]*self.to_weight(score)
@@ -120,6 +142,7 @@ class GeneticAlgorithm:
             # update the population
             self.population = offspring
             self.generations += [copy.copy(self.population)]
+            print(f'iter: {i}')
 
         return self.population
 

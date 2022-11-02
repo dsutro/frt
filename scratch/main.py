@@ -12,6 +12,7 @@ import argparse
 import numpy as np
 from scipy.io.wavfile import write
 import soundfile as sf
+from listen import spectral_features
 
 
 SR = 44100
@@ -30,7 +31,8 @@ def initialize():
   ga = genalg.GeneticAlgorithm(target_file)
   ga.to_phenotype = to_phenotype
   ga.random_individual = random_individual
-  ga.fitness_func = fitness
+  # ga.fitness_func = fitness
+  ga.fitness_func = fitness_fnc_euc
 
   return ga
 
@@ -57,26 +59,38 @@ def to_phenotype(genotype):
   # synthesize audio using FM synthesis
   y = synths.fm(carrier, modulator, index1, index2, attack, release)
 
-  data = np.random.uniform(-1, 1, 99600)
+  # data = np.random.uniform(-1, 1, 99600)
   # scaled = np.int16(y / np.max(np.abs(y)) * 32767)
   # write('test.wav', SR, scaled)
 
-  sf.write('test.wav', data, SR, 'PCM_24')
+  sf.write('test.wav', y, SR, 'PCM_24')
 
   return 'test.wav'
 
-# def fitness_fnc_euc(target_audio, synth_audio):
-#   euc_fnc = lambda x, y: math.sqrt(x**2 - y**2)
-#   target_features = mai.listen.spectral_features(target_audio)
-#   synth_features = mai.listen.spectral_features(synth_audio)
+def fitness_fnc_euc(synth_fname, target_features):
+  # euc_fnc = lambda x, y: (x**2 - y**2)
+  euc_fnc = lambda x, y: math.sqrt(sum([(xx - yy)**2 for xx, yy in zip(x, y)]))
+  synth_features = spectral_features(synth_fname)
 
-#   score = 0
-#   for key in target_features.keys():
-#     score += euc_fnc(target_features[key], synth_features[key])
+  score = 0
+  for key in target_features.keys():
+    cut_i = min(len(synth_features[key]), len(target_features[key]))
+    # TODO: penalize len diff
+    # len_dif = max(len(synth_features), len(target_features)) - min(len(synth_features), len(target_features))
 
-#   return score
+    score += euc_fnc(target_features[key][:cut_i], synth_features[key][:cut_i])
+
+  score = (score / len(target_features.keys()))
+  print(score)
+  return score
 
 if __name__ == '__main__':
   ga = initialize()
 
-  pop = ga.evolve()
+  pop = ga.evolve(population_size=10)
+  # feats = spectral_features('test.wav')
+  # for key in feats.keys():
+  #   print(len(feats[key]))
+
+  
+
