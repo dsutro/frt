@@ -1,3 +1,4 @@
+import os
 import json
 from werkzeug.utils import secure_filename
 from flask import request
@@ -6,9 +7,10 @@ from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
 arr = []
-fname = []
+fname = "file_"
 @app.route('/')
 def index():
+    os.makedirs(os.path.join(app.instance_path, 'mp3files'), exist_ok=True)
     return render_template('index.html')
 
 @app.route('/test', methods=['POST'])
@@ -33,8 +35,14 @@ def sound_feed():
 def upload_file():
    if request.method == 'POST':
       f = request.files['file']
-      f.save(secure_filename(f.filename))
-      fname.append(f.filename)
+      file_number = open("file_count", "r+")
+      num = file_number.read()
+      num = int(num)
+      file_number.seek(0)
+      file_number.write(str(num+1))
+      file_number.close()
+      fname = "file_{}.mp3".format(num)
+      f.save(os.path.join(app.instance_path, 'mp3files', secure_filename(fname)))
       print(fname)
       return render_template('index.html')
 
