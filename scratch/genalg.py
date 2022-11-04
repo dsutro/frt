@@ -5,6 +5,16 @@ import numpy as np
 import copy
 from listen import spectral_features
 from fitness import fitness, calculate_fingerprints
+import librosa
+import synths
+import musicfuncs as mf
+import numpy as np
+from scipy.io.wavfile import write
+import soundfile as sf
+from listen import spectral_features
+
+# global ---------------------
+
 
 # default functions ----------------------------------------------------------------------
 
@@ -14,8 +24,6 @@ def random_individual():
     return [random.randrange(0,2) for i in range(10)]
 
 def to_phenotype(genotype):
-    """Trivial mapping genotype -> phenotype (for now...)"""
-
     return genotype
 
 def to_weight(fitness, m=100, b=1):
@@ -62,14 +70,15 @@ class GeneticAlgorithm:
 
         # initialize default functions
         self.random_individual = random_individual
-        self.to_phenotype = to_phenotype
         self.fitness_func = fitness
+        self.to_phenotype = to_phenotype
         self.to_weight = to_weight
         self.reproduce = reproduce
         self.mutate = mutate
         self.target_fname = target_fname
         self.target_fingerprint = None
         self.target_features = None
+        self.sr = 44100
 
         # try to fingerprint target
         # try:
@@ -80,6 +89,7 @@ class GeneticAlgorithm:
         # try to get target features
         try:
             self.target_features = spectral_features(target_fname)
+            self.duration = librosa.get_duration(filename=target_fname)
         except Exception as e:
             print(f'Genetic Algorithm initialization failed due to : {e}')
 
@@ -113,15 +123,14 @@ class GeneticAlgorithm:
             #            for individual in self.population]
 
             # spectral features fitness
-            self.fitness = [(self.fitness_func(self.to_phenotype(individual), self.target_features), individual)
+            self.fitness = [(self.fitness_func(self.to_phenotype(individual, self.duration, self.sr), self.target_features), individual)
                        for individual in self.population]
-
-            print(type(self.fitness))
-            print(self.fitness)
 
             # adjust fitness (when using spectral features)
             max_fitness = max([self.fitness[i][0] for i in range(self.population_size)])
+            print(type(max_fitness))
             for i in range(self.population_size):
+                self.fitness[i] = list(self.fitness[i])
                 self.fitness[i][0] = 1 - (self.fitness[i][0] / max_fitness)
 
             # construct mating pool of probabilities weighted by fitness score

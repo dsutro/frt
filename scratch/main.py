@@ -40,32 +40,36 @@ def random_individual():
   """Generate random genotype 6 values in range [0,1]."""
   
   # create a random genotype
-  genotype = [random.random() for i in range(6)]
+  genotype = [random.random() for i in range(5)]
 
   # return it
   return genotype
 
-def to_phenotype(genotype):
-  """Convert genotype to sound using FM synthesis."""
-    
-  # scale values
-  carrier   = mf.scale(genotype[0], 1, 10000, kind='exp')  # carrier freq
-  modulator = mf.scale(genotype[1], 1, 10000, kind='exp')  # modulator freq 
-  index1    = mf.scale(genotype[2], 1, 100, kind='exp')    # index start
-  index2    = mf.scale(genotype[3], 1, 100, kind='exp')    # index end
-  attack    = mf.scale(genotype[4], 0.01, 5, kind='exp')   # attack
-  release   = mf.scale(genotype[5], 0.01, 5, kind='exp')   # release
-  
-  # synthesize audio using FM synthesis
-  y = synths.fm(carrier, modulator, index1, index2, attack, release)
+def to_phenotype(genotype, duration ,sr):
+        """Convert genotype to sound using FM synthesis."""
+            
+        # scale values
+        carrier   = mf.scale(genotype[0], 1, 10000, kind='exp')  # carrier freq
+        modulator = mf.scale(genotype[1], 1, 10000, kind='exp')  # modulator freq 
+        index1    = mf.scale(genotype[2], 1, 100, kind='exp')    # index start
+        # index2    = mf.scale(genotype[3], 1, 100, kind='exp')    # index end
+        attack    = mf.scale(genotype[3], 0.01, 5, kind='exp')   # attack
+        release   = mf.scale(genotype[4], 0.01, 5, kind='exp')   # release
 
-  # data = np.random.uniform(-1, 1, 99600)
-  # scaled = np.int16(y / np.max(np.abs(y)) * 32767)
-  # write('test.wav', SR, scaled)
+        # randomly use attack or release to ensure target duration
+        check = random.random()
+        print(f"dur:{duration}\nsr: {sr}\natt: {attack}\nrel: {release}\ncarrier: {carrier}\nmod: {modulator}\nindex: {index1}")
+        if (check > 0.5):
+            release = abs(duration - attack)
+        else:
+            attack = abs(duration - release)
+        
+        # synthesize audio using FM synthesis
+        y = synths.fm(carrier=carrier, modulator=modulator, index1=index1, 
+                        index2=0, attack=attack, release=release)
 
-  sf.write('test.wav', y, SR, 'PCM_24')
-
-  return 'test.wav'
+        sf.write(f'test.wav', y, sr, 'PCM_24')
+        return f'test.wav'
 
 def fitness_fnc_euc(synth_fname, target_features):
   # euc_fnc = lambda x, y: (x**2 - y**2)
@@ -87,10 +91,17 @@ def fitness_fnc_euc(synth_fname, target_features):
 if __name__ == '__main__':
   ga = initialize()
 
-  pop = ga.evolve(population_size=10)
+  y = synths.fm(carrier=900, modulator=300, index1=10, 
+                        index2=0, attack=1, release=0)
+
+  sf.write(f'synth_test.wav', y, 44100, 'PCM_24')
+
+  # pop = ga.evolve(iters=20, population_size=20)
+  # print(pop)
   # feats = spectral_features('test.wav')
   # for key in feats.keys():
   #   print(len(feats[key]))
+  # ga.plot_generations(all=True)
 
   
 
