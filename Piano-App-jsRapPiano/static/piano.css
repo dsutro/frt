@@ -88,3 +88,24 @@ div .oct-key{
 div .oct-key.active{
     background: #b8a734;
 }
+
+div #octave_div {
+    position: relative;
+    right: 600px;
+    top: 225px;
+}
+
+div #oct-plus {
+    position: relative;
+    right: 685px;
+    top: 200px;
+    z-index: 3;
+}
+
+div #oct-minus {
+    position: relative;
+    right: 642px;
+    top: 195px;
+    font-size: 25px;
+    z-index: 3;
+}
