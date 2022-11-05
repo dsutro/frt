@@ -1,9 +1,8 @@
-
 const synth = new Tone.FMSynth({
   envelope: {
-    attack: 0.01,
+    attack: params.attack,
     decay: 2,
-    release: 1000
+    release: params.release
   },
   modulationEnvelope: {
     attack: 0.5,

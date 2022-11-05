@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Demo</title>
+<script>
+var params = {{ params|tojson|safe }};
+</script>
 <script src="https://unpkg.com/tone"></script>
 <link rel="stylesheet" href="{{ url_for('static',filename='piano.css') }}" />
 <link rel="stylesheet" href="{{ url_for('static',filename='index.css') }}" />

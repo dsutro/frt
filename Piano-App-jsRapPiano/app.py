@@ -11,7 +11,8 @@ fname = "file_"
 @app.route('/')
 def index():
     os.makedirs(os.path.join(app.instance_path, 'mp3files'), exist_ok=True)
-    return render_template('index.html')
+    params = {"attack":.05,"release":1000}
+    return render_template('index.html',params=params)
 
 @app.route('/test', methods=['POST'])
 def test():
@@ -44,7 +45,8 @@ def upload_file():
       fname = "file_{}.mp3".format(num)
       f.save(os.path.join(app.instance_path, 'mp3files', secure_filename(fname)))
       print(fname)
-      return render_template('index.html')
+      params = {"attack": 0.01, "release": 10}
+      return render_template("index.html",params=params)
 
 if __name__ == '__main__':
     app.run(debug=True)
