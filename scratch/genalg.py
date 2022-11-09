@@ -3,15 +3,18 @@ import functools
 import matplotlib.pyplot as plt
 import numpy as np
 import copy
-from listen import spectral_features
-from fitness import fitness, calculate_fingerprints
 import librosa
-import synths
-import musicfuncs as mf
 import numpy as np
 from scipy.io.wavfile import write
 import soundfile as sf
+from multiprocessing import Pool
+
+# local
 from listen import spectral_features
+from fitness import fitness, calculate_fingerprints
+import synths
+from listen import spectral_features
+import musicfuncs as mf
 
 # global ---------------------
 
@@ -61,6 +64,10 @@ def mutate(genotype, mutation_prob=0.01, inbreeding_prob=0.5, verbose=True):
 
     return genotype
 
+def fitness_job(self, iter, i):
+    fname = f"temp/temp_audio_gen_{iter}_"
+    self.fitness[i] = (self.fitness_func(self.to_phenotype(self.population[i], self.duration, self.sr, fname), self.target_features), self.population[i])
+
 # genetic algorithm  ---------------------------------------------------------------------
 
 class GeneticAlgorithm:
@@ -106,6 +113,8 @@ class GeneticAlgorithm:
         # initialize fitness to 0 for all
         self.fitness = [[0, individual] for individual in self.population]
 
+
+
     def evolve(self, iters=10, population_size=100, init_pop=True, mutation_prob=0.01):
         """Run the GA."""
 
@@ -114,21 +123,25 @@ class GeneticAlgorithm:
             self.population_size = population_size
             self.population = [self.random_individual() for i in range(population_size)]
             self.generations = [copy.copy(self.population)]
+            self.fitness = [[0, individual] for individual in self.population]
 
         # loop iters times
-        for i in range(iters):
+        for iter in range(iters):
 
             # evaluate fitness over the entire population (fingerprinting fitness)
             # self.fitness = [(self.fitness_func(self.to_phenotype(individual), self.target_fingerprint), individual)
             #            for individual in self.population]
 
-            # spectral features fitness
-            self.fitness = [(self.fitness_func(self.to_phenotype(individual, self.duration, self.sr), self.target_features), individual)
-                       for individual in self.population]
+            # spectral features fitness 
+            arg1 = [self]*self.population_size
+            arg2 = [iter]*self.population_size
+            arg3 = [i for i in range(population_size)]
+            with Pool(4) as p:
+                p.starmap(fitness_job, zip(arg1, arg2, arg3))
 
             # adjust fitness (when using spectral features)
             max_fitness = max([self.fitness[i][0] for i in range(self.population_size)])
-            print(type(max_fitness))
+            print(max_fitness)
             for i in range(self.population_size):
                 self.fitness[i] = list(self.fitness[i])
                 self.fitness[i][0] = 1 - (self.fitness[i][0] / max_fitness)
@@ -151,7 +164,7 @@ class GeneticAlgorithm:
             # update the population
             self.population = offspring
             self.generations += [copy.copy(self.population)]
-            print(f'iter: {i}')
+            print(f'iter: {iter}')
 
         return self.population
 
