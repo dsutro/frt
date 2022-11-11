@@ -65,6 +65,7 @@ def mutate(genotype, mutation_prob=0.01, inbreeding_prob=0.5, verbose=True):
     return genotype
 
 def fitness_job(self, iter, i):
+    """Fitness job to run fitness function in parallel"""
     fname = f"temp/temp_audio_gen_{iter}_"
     self.fitness[i] = (self.fitness_func(self.to_phenotype(self.population[i], self.duration, self.sr, fname), self.target_features), self.population[i])
 
@@ -86,12 +87,6 @@ class GeneticAlgorithm:
         self.target_fingerprint = None
         self.target_features = None
         self.sr = 44100
-
-        # try to fingerprint target
-        # try:
-        #     self.target_fingerprint = calculate_fingerprints(self.target_fname)
-        # except Exception as e:
-        #     print(f'Genetic Algorithm initialization failed due to : {e}')
 
         # try to get target features
         try:
@@ -128,10 +123,6 @@ class GeneticAlgorithm:
         # loop iters times
         for iter in range(iters):
 
-            # evaluate fitness over the entire population (fingerprinting fitness)
-            # self.fitness = [(self.fitness_func(self.to_phenotype(individual), self.target_fingerprint), individual)
-            #            for individual in self.population]
-
             # spectral features fitness 
             arg1 = [self]*self.population_size
             arg2 = [iter]*self.population_size
@@ -141,7 +132,7 @@ class GeneticAlgorithm:
 
             # adjust fitness (when using spectral features)
             max_fitness = max([self.fitness[i][0] for i in range(self.population_size)])
-            print(max_fitness)
+            print(f"Max Fitness: {max_fitness}")
             for i in range(self.population_size):
                 self.fitness[i] = list(self.fitness[i])
                 self.fitness[i][0] = 1 - (self.fitness[i][0] / max_fitness)

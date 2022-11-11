@@ -28,8 +28,6 @@ def initialize():
   ga = genalg.GeneticAlgorithm(target_file)
   ga.to_phenotype = to_phenotype
   ga.random_individual = random_individual
-  # fitness: chromaprint | fitness_fnc_euc: spectral features
-  # ga.fitness_func = fitness
   ga.fitness_func = fitness_fnc_euc
 
   return ga
@@ -38,7 +36,7 @@ def random_individual():
   """Generate random genotype 6 values in range [0,1]."""
   
   # create a random genotype
-  genotype = [random.random() for i in range(6)]
+  genotype = [random.random() for i in range(5)]
 
   # return it
   return genotype
@@ -50,9 +48,9 @@ def to_phenotype(genotype, duration, sr, fname='temp_audio'):
         carrier   = mf.scale(genotype[0], 1, 10000, kind='exp')  # carrier freq
         modulator = mf.scale(genotype[1], 1, 10000, kind='exp')  # modulator freq 
         index1    = mf.scale(genotype[2], 1, 100, kind='exp')    # index start
-        index2    = mf.scale(genotype[3], 1, 100, kind='exp')    # index end
-        attack    = mf.scale(genotype[4], 0.01, 5, kind='exp')   # attack
-        release   = mf.scale(genotype[5], 0.01, 5, kind='exp')   # release
+        # index2    = mf.scale(genotype[3], 1, 100, kind='exp')    # index end
+        attack    = mf.scale(genotype[3], 0.01, 5, kind='exp')   # attack
+        release   = mf.scale(genotype[4], 0.01, 5, kind='exp')   # release
 
         # randomly use attack or release to ensure target duration
         check = random.random()
@@ -97,7 +95,7 @@ if __name__ == '__main__':
 
   # sf.write(f'synth_test.wav', y, 44100, 'PCM_24')
 
-  pop = ga.evolve(iters=10, population_size=10, mutation_prob=0.1)
+  pop = ga.evolve(iters=10, population_size=10, mutation_prob=0.02)
   print(pop)
   # feats = spectral_features('test.wav')
   # for key in feats.keys():
