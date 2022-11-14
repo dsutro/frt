@@ -68,7 +68,7 @@ def mutate(genotype, mutation_prob=0.01, inbreeding_prob=0.5, verbose=True):
 def fitness_job(self, iter, i):
     """Fitness job to run fitness function in parallel"""
     fname = f"temp/temp_audio_gen_{iter}_"
-    fitness = (self.fitness_func(self.to_phenotype(self.population[i], self.duration, self.sr, fname), self.target_features), self.population[i])
+    fitness = (self.fitness_func(self.to_phenotype(self.population[i], self.duration, self.sr, fname), self.target_mfcc), self.population[i])
     self.fitness[i] = fitness
     print(f"Updating individual {i}: {self.fitness[i]}")
     return fitness
@@ -105,6 +105,8 @@ class GeneticAlgorithm:
                                 format = "wav")
             self.target_features = spectral_features("trimmed_target.wav")
             self.duration = len(trimmed_sound)*1e-3
+            target_synth, self.sr = librosa.load("trimmed_target.wav")
+            self.target_mfcc = librosa.feature.mfcc(target_synth, self.sr)
             print(self.duration)
         except Exception as e:
             print(f'Genetic Algorithm initialization failed due to : {e}')

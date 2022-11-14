@@ -10,6 +10,8 @@ import math
 import librosa
 import argparse
 import numpy as np
+from dtw import dtw
+from numpy.linalg import norm
 from scipy.io.wavfile import write
 import soundfile as sf
 from listen import spectral_features
@@ -28,7 +30,7 @@ def initialize():
   ga = genalg.GeneticAlgorithm(target_file)
   ga.to_phenotype = to_phenotype
   ga.random_individual = random_individual
-  ga.fitness_func = fitness_fnc_euc
+  ga.fitness_func = fitness_fnc_dtw
 
   return ga
 
@@ -87,6 +89,12 @@ def fitness_fnc_euc(synth_fname, target_features):
   print(score)
   return score
 
+def fitness_fnc_dtw(synth_fname, target_mfcc):
+  synth, sr = librosa.load(synth_fname)
+  synth_mfcc = librosa.feature.mfcc(synth, sr)
+  dist, cost, acc_cost, path = dtw(synth_mfcc.T, target_mfcc.T, dist=lambda x, y: norm(x - y, ord=1))
+  return dist
+
 if __name__ == '__main__':
   ga = initialize()
 
@@ -96,7 +104,7 @@ if __name__ == '__main__':
   # sf.write(f'synth_test.wav', y, 44100, 'PCM_24')
   print(ga.target_features['lowlevel.spectral_rms'])
   print(len(ga.target_features['lowlevel.spectral_rms']))
-  pop = ga.evolve(iters=20, population_size=20, mutation_prob=0.05)
+  pop = ga.evolve(iters=10, population_size=10, mutation_prob=0.05)
   print(pop)
   # feats = spectral_features('test.wav')
   # for key in feats.keys():
