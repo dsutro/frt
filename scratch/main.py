@@ -94,8 +94,9 @@ if __name__ == '__main__':
   #                       index2=0, attack=1, release=0)
 
   # sf.write(f'synth_test.wav', y, 44100, 'PCM_24')
-
-  pop = ga.evolve(iters=10, population_size=10, mutation_prob=0.02)
+  print(ga.target_features['lowlevel.spectral_rms'])
+  print(len(ga.target_features['lowlevel.spectral_rms']))
+  pop = ga.evolve(iters=20, population_size=20, mutation_prob=0.05)
   print(pop)
   # feats = spectral_features('test.wav')
   # for key in feats.keys():

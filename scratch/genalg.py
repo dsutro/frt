@@ -8,12 +8,13 @@ import numpy as np
 from scipy.io.wavfile import write
 import soundfile as sf
 from multiprocessing import Pool
+from pydub import AudioSegment
 
 # local
 from listen import spectral_features
 from fitness import fitness, calculate_fingerprints
 import synths
-from listen import spectral_features
+from listen import spectral_features, detect_leading_silence
 import musicfuncs as mf
 
 # global ---------------------
@@ -67,7 +68,11 @@ def mutate(genotype, mutation_prob=0.01, inbreeding_prob=0.5, verbose=True):
 def fitness_job(self, iter, i):
     """Fitness job to run fitness function in parallel"""
     fname = f"temp/temp_audio_gen_{iter}_"
-    self.fitness[i] = (self.fitness_func(self.to_phenotype(self.population[i], self.duration, self.sr, fname), self.target_features), self.population[i])
+    fitness = (self.fitness_func(self.to_phenotype(self.population[i], self.duration, self.sr, fname), self.target_features), self.population[i])
+    self.fitness[i] = fitness
+    print(f"Updating individual {i}: {self.fitness[i]}")
+    return fitness
+
 
 # genetic algorithm  ---------------------------------------------------------------------
 
@@ -90,8 +95,17 @@ class GeneticAlgorithm:
 
         # try to get target features
         try:
-            self.target_features = spectral_features(target_fname)
-            self.duration = librosa.get_duration(filename=target_fname)
+            # TODO: trim spectral featurs and duration to when sound is being produced
+            sound = AudioSegment.from_file(self.target_fname, format="wav")
+
+            start_trim = detect_leading_silence(sound)
+            end_trim = detect_leading_silence(sound.reverse())   
+            trimmed_sound = sound[start_trim:len(sound)-end_trim]
+            trimmed_sound.export(out_f= "trimmed_target.wav",
+                                format = "wav")
+            self.target_features = spectral_features("trimmed_target.wav")
+            self.duration = len(trimmed_sound)*1e-3
+            print(self.duration)
         except Exception as e:
             print(f'Genetic Algorithm initialization failed due to : {e}')
 
@@ -128,14 +142,18 @@ class GeneticAlgorithm:
             arg2 = [iter]*self.population_size
             arg3 = [i for i in range(population_size)]
             with Pool(4) as p:
-                p.starmap(fitness_job, zip(arg1, arg2, arg3))
+                self.fitness = p.starmap(fitness_job, zip(arg1, arg2, arg3))
+                p.close()
+                p.join()
 
             # adjust fitness (when using spectral features)
+            print(f"Fitness calc done\n{self.fitness}")
             max_fitness = max([self.fitness[i][0] for i in range(self.population_size)])
             print(f"Max Fitness: {max_fitness}")
             for i in range(self.population_size):
                 self.fitness[i] = list(self.fitness[i])
                 self.fitness[i][0] = 1 - (self.fitness[i][0] / max_fitness)
+            print(self.fitness)
 
             # construct mating pool of probabilities weighted by fitness score
             mating_pool = functools.reduce(lambda x,y: x+y, [[individual]*self.to_weight(score)

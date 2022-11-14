@@ -3,6 +3,7 @@ import essentia
 from essentia import standard
 import numpy as np
 from pyfid import ppitch
+from pydub import AudioSegment
 
 def spectrogram(y, **kwargs):
     """Compute db-scale magnitude spectrum."""
@@ -24,6 +25,22 @@ def ypitch(y, frame_length, hop_length):
         confidences.append(confidence) 
 
     return pitches, confidences
+
+def detect_leading_silence(sound, silence_threshold=-50.0, chunk_size=10):
+    '''
+    sound is a pydub.AudioSegment
+    silence_threshold in dB
+    chunk_size in ms
+
+    iterate over chunks until you find the first one with sound
+    '''
+    trim_ms = 0 
+
+    assert chunk_size > 0 
+    while sound[trim_ms:trim_ms+chunk_size].dBFS < silence_threshold and trim_ms < len(sound):
+        trim_ms += chunk_size
+
+    return trim_ms
 
 def spectral_features(filename, frame_length=2048, hop_length=1024, sr=44100):
     """Extract basic spectral features."""
