@@ -6,6 +6,13 @@
      align-items: center;
      min-height: 100vh;
 }
+#piano{
+    margin: auto;
+    position: relative;
+    top: 0px;
+    bottom: -150px;
+    left: 105px;
+}
  div {
      list-style: none;
      display: flex;

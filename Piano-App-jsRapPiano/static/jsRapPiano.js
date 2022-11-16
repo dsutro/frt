@@ -1,23 +1,57 @@
 const synth = new Tone.FMSynth({
-  envelope: {
-    attack: params.attack,
-    decay: 2,
-    release: params.release
-  },
-  modulationEnvelope: {
-    attack: 0.5,
-    release: 200
-  }
+	//harmonicity  : 3 ,
+	modulationIndex  : 10 ,
+	detune  : 0 ,
+	harmonicity  : params.harmonicity ,
+	modulationIndex  : params.modulationIndex ,
+	// detune  : params.detune ,
+	oscillator  : {
+	//type  : "sine"
+	type  : params.car_type
+	},
+	envelope  : {
+	//attack  : 0.01 ,
+	// decay  : 0.01 ,
+	// sustain  : 1 ,
+	// release  : 0.5,
+	attack  : params.amp_attack ,
+	decay  : params.amp_decay ,
+	sustain  : params.amp_sustain ,
+	release  : params.amp_release
+	}  ,
+	modulation  : {
+	// type  : "square"
+	type : params.mod_type
+	}  ,
+	modulationEnvelope  : {
+	// attack  : 0.5 ,
+	// decay  : 0 ,
+	// sustain  : 1 ,
+	// release  : 0.5,
+	attack  : params.mod_attack ,
+	decay  : params.mod_decay ,
+	sustain  : params.mod_sustain ,
+	release  : params.mod_release
+	}
 });
+
+
+
 // Set the tone to sine
-synth.oscillator.type = "triangle8";
+//synth.oscillator.type = "sine";
+
+//synth.oscillator.frequency = 900;
+//synth.oscillator.modulationrequency = 3;
+
+//synth.harmonicity.value = 10;
+
 // connect it to the master output (your speakers)
 synth.toDestination();
 
 const piano = document.getElementById("piano");
 console.log("hello");
 
-let userOctave = 4;
+let userOctave = 3;
 $('#dis-user-oct').html(userOctave);
 let note = "C"
 note+=userOctave
@@ -40,7 +74,7 @@ piano.addEventListener("mousedown", e => {
 		$('#dis-user-oct').html(userOctave);
 	}
 	if(e.target.getAttribute('id') === 'x'){
-		if (userOctave < 5){
+		if (userOctave < 6){
 			userOctave++;
 		}
 		$('#dis-user-oct').html(userOctave);

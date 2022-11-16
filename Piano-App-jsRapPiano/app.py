@@ -2,6 +2,7 @@ import os
 import json
 from werkzeug.utils import secure_filename
 from flask import request
+from main import run_ga
 
 from flask import Flask, render_template, jsonify
 
@@ -11,7 +12,25 @@ fname = "file_"
 @app.route('/')
 def index():
     os.makedirs(os.path.join(app.instance_path, 'mp3files'), exist_ok=True)
-    params = {"attack":.05,"release":1000}
+    params = {
+        "harmonicity" : 3.5 ,
+        "modulationIndex" : 25 ,
+        "detune" : 0 ,
+        "car_type" : "sine" ,
+        "amp_attack" : 0.01 ,
+        "amp_decay" : 0.01 ,
+        "amp_sustain" : 1 ,
+        "amp_release" : 5 ,
+        "mod_type" : "sine" ,
+        "mod_attack" : 0.01 ,
+        "mod_decay" : 0 ,
+        "mod_sustain" : 1 ,
+        "mod_release" : 10
+        # "attack": 0.01, 
+        # "release": 10
+        # "attack":0.01,
+        # "release":1000
+        }
     return render_template('index.html',params=params)
 
 @app.route('/test', methods=['POST'])
@@ -44,8 +63,24 @@ def upload_file():
       file_number.close()
       fname = "file_{}.mp3".format(num)
       f.save(os.path.join(app.instance_path, 'mp3files', secure_filename(fname)))
-      print(fname)
-      params = {"attack": 0.01, "release": 10}
+      pth = "instance/mp3files/" + fname
+      final_dict = run_ga(pth)
+      print(final_dict)
+      params = {
+        "harmonicity" : 2.5 ,
+        "modulationIndex" : 10 ,
+        "detune" : 0 ,
+        "car_type" : "sine" ,
+        "amp_attack" : 0.01 ,
+        "amp_decay" : 0.01 ,
+        "amp_sustain" : 1 ,
+        "amp_release" : 5 ,
+        "mod_type" : "square" ,
+        "mod_attack" : 0.01 ,
+        "mod_decay" : 0 ,
+        "mod_sustain" : 1 ,
+        "mod_release" : 10
+      }
       return render_template("index.html",params=params)
 
 if __name__ == '__main__':

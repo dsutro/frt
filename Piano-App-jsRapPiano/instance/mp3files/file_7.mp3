@@ -1,0 +1,8 @@
+﻿Anthony White
+CSE 115A
+Professor Jullig
+
+
+RAC 3
+        The Danger of Architectural Technical Debt: Contagious Debt and Vicious Circles was published in 2015 by the IEEE/IFIP Conference on Software Architecture. It was written by Antonio Martini and Jan Bosch from the Chalmers University of Technology in Sweden. This article discusses the trade-off between short- and long-term goals when designing large software systems. The short-term goals often cause architecture violations which can cause problems when trying to accomplish long term goals.
+        Technical Debt is
