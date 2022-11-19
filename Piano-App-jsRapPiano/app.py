@@ -64,8 +64,9 @@ def upload_file():
       fname = "file_{}.mp3".format(num)
       f.save(os.path.join(app.instance_path, 'mp3files', secure_filename(fname)))
       pth = "instance/mp3files/" + fname
+      #print(pth)
       final_dict = run_ga(pth)
-      print(final_dict)
+      #print(final_dict)
       params = {
         "harmonicity" : 2.5 ,
         "modulationIndex" : 10 ,
@@ -76,7 +77,7 @@ def upload_file():
         "amp_sustain" : 1 ,
         "amp_release" : 5 ,
         "mod_type" : "square" ,
-        "mod_attack" : 0.01 ,
+        "mod_attack" : final_dict["attack"] ,
         "mod_decay" : 0 ,
         "mod_sustain" : 1 ,
         "mod_release" : 10

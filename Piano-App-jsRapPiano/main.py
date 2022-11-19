@@ -60,7 +60,7 @@ def to_phenotype(genotype, duration, sr, fname='temp_audio'):
         else:
             attack = abs(duration - release)
 
-        print(f"dur:{duration}\nsr: {sr}\natt: {attack}\nrel: {release}\ncarrier: {carrier}\nmod: {modulator}\nindex: {index1}")
+        #print(f"dur:{duration}\nsr: {sr}\natt: {attack}\nrel: {release}\ncarrier: {carrier}\nmod: {modulator}\nindex: {index1}")
         
         # synthesize audio using FM synthesis
         y = synths.fm(carrier=carrier, modulator=modulator, index1=index1, 
@@ -85,7 +85,7 @@ def fitness_fnc_euc(synth_fname, target_features):
     score += euc_fnc(target_features[key][:cut_i], synth_features[key][:cut_i])
 
   score = (score / len(target_features.keys()))
-  print(score)
+  #print(score)
   return score
 
 def fitness_fnc_dtw(synth_fname, target_mfcc):
@@ -114,7 +114,7 @@ def run_ga(target_fname, generations=10, population_size=10, mutation_prob=0.05)
 
 
 if __name__ == '__main__':
-  params = run_ga('../assets/sine.wav')
-  print(params)
+  params = run_ga('../violin-G4.wav')
+
 
   

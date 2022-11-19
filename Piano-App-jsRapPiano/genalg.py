@@ -12,7 +12,9 @@ from pydub import AudioSegment
 
 # local
 import synths
-from listen import spectral_features, detect_leading_silence
+#from listen import spectral_features, detect_leading_silence
+from listen import detect_leading_silence
+
 import musicfuncs as mf
 
 # global ---------------------
@@ -68,7 +70,7 @@ def fitness_job(self, iter, i):
     fname = f"../scratch/temp/temp_audio_gen_{iter}_"
     fitness = (self.fitness_func(self.to_phenotype(self.population[i], self.duration, self.sr, fname), self.target_mfcc), self.population[i])
     self.fitness[i] = fitness
-    print(f"Updating individual {i}: {self.fitness[i]}")
+    #print(f"Updating individual {i}: {self.fitness[i]}")
     return fitness
 
 
@@ -101,14 +103,14 @@ class GeneticAlgorithm:
             trimmed_sound = sound[start_trim:len(sound)-end_trim]
             trimmed_sound.export(out_f= "trimmed_target.wav",
                                 format = "wav")
-            self.target_features = spectral_features("trimmed_target.wav")
+            #self.target_features = spectral_features("trimmed_target.wav")
             self.duration = len(trimmed_sound)*1e-3
             target_synth, self.sr = librosa.load("trimmed_target.wav")
             self.target_mfcc = librosa.feature.mfcc(target_synth, self.sr)
-            print(self.duration)
+            #print(self.duration)
         except Exception as e:
-            print(f'Genetic Algorithm initialization failed due to : {e}')
-
+            #print(f'Genetic Algorithm initialization failed due to : {e}')
+            dummy = 1
     def initialize_population(self, population_size=10):
         """Initialize the population."""
 
@@ -147,13 +149,13 @@ class GeneticAlgorithm:
                 p.join()
 
             # adjust fitness (when using spectral features)
-            print(f"Fitness calc done\n{self.fitness}")
+            #print(f"Fitness calc done\n{self.fitness}")
             max_fitness = max([self.fitness[i][0] for i in range(self.population_size)])
-            print(f"Max Fitness: {max_fitness}")
+            #print(f"Max Fitness: {max_fitness}")
             for i in range(self.population_size):
                 self.fitness[i] = list(self.fitness[i])
                 self.fitness[i][0] = 1 - (self.fitness[i][0] / max_fitness)
-            print(self.fitness)
+            #print(self.fitness)
 
             # construct mating pool of probabilities weighted by fitness score
             mating_pool = functools.reduce(lambda x,y: x+y, [[individual]*self.to_weight(score)
@@ -173,7 +175,7 @@ class GeneticAlgorithm:
             # update the population
             self.population = offspring
             self.generations += [copy.copy(self.population)]
-            print(f'iter: {iter}')
+            #print(f'iter: {iter}')
 
         return self.population
 
