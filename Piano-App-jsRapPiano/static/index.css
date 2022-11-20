@@ -1,9 +1,39 @@
-body{background-color:lightgrey;}
-#divMain{
-margin:auto;
-width:80%;
-bottom: 0;
-position: absolute;
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+body {
+    background: rgba(64,64,102, .5);
+    font-family: 'Roboto', sans-serif;
+    /* background: linear-gradient(0deg, rgba(223,102,98,0.49763655462184875) 0%, rgba(64,64,102,0.500437675070028) 100%); */
+}
+p {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.test{
+    background-color: #471D75ff;/* blue violet */
+    background-color: #FFFFFFff;/* white */
+    background-color: #702D58ff;/* byzantium */
+    background-color: #DF6662ff;/* fuzzy wuzzy */
+    background-color: #FCF7C1ff;/* blond */
+    background-color: #fffcdd;/* white-blond */
+}
+
+.navbar {
+    /* overflow: hidden; */
+    background-color: #DF6662ff;
+    border: #471D75ff;
+    border-width: 5px;
+    position: absolute;
+    /* display: inline-block; */
+    /* align-items: center; */
+    /* Set the navbar to fixed position */
+    top: 0;
+    /* Position the navbar at the top of the page */
+    width: 100%;
+    /* Full width */
+    text-align: center;
+    display: inline-block;
+    z-index: 100;
 }
 
 .images {
@@ -54,43 +84,138 @@ position: absolute;
     background-color: ivory;
 }
 
-/* #divGitHub{
-top:0px;
-right:0px;
-width:200px;
-height:200px;
-overflow:hidden;
-position:absolute;
-z-index:100;
-pointer-events:none;
-}
-#GitHub{
-background-color:#800;	
-border:solid 2px black;	
-color:white;
-cursor:pointer;
-font:bold 14px Arial,Helvetica,sans-serif;
-height:20px;
-padding-top:3px;
-position:absolute;
-right:60px;
-text-align: center;
-transform:translate(50%,-50%) rotate(45deg);
-text-shadow: 0 0 8px black;
-top:60px;
-width:240px;
--webkit-touch-callout: none;
--webkit-user-select: none;
--moz-user-select: none;
-pointer-events:auto;
-}
-#GitHub:after{
-content:'Star me on GitHub';
-}
-#GitHub:hover{
-background-color:#f00;
-} */
-#demo1{
-margin:8px auto;
+
+.logo img {
+    position: absolute;
+    top: 4px;
+    left: 0px;
+    z-index: 3000000;
+    height: 51px;
+    width: auto;
+    left: 15px;
 }
 
+/* Links inside the navbar */
+.navbar a {
+    /* float: center; */
+    display: inline-block;
+    /* position: absolute; */
+    /* left: 300px; */
+    color: #FFFFFFff;
+    text-align: center;
+    padding: 20px 26px;
+    text-decoration: none;
+}
+
+/* Change background on mouse-over */
+.navbar a:hover {
+    background: rgb(222, 136, 133);
+    color: rgb(255, 255, 255);
+}
+
+.main {
+    position: relative;
+    margin-top: 80px;
+}
+
+.row {
+    align-content: center;
+    position: relative;
+    left: 70px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    padding: 0px;
+}
+
+.webBox {
+    width: 350px;
+    /* display: flex; */
+    /* flex: 1; */
+    /* margin-right: 15px;
+    margin-left: 15px; */
+    height: 200px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.webBox:nth-child(odd) {
+    margin-right: 15px;
+}
+
+.webBox:nth-child(even) {
+    margin-left: 15px;
+}
+
+.directions {
+    /* display: flex; */
+    border-radius: 2px;
+    background-color: #fffcdd;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.fileSub {
+    border-radius: 4px;
+    background-color: #fffcdd;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    /* z-index: ; */
+}
+
+.oldImg {
+    /* float: left; */
+    /* display: flex;
+    flex-wrap: wrap; */
+    z-index: -1;
+}
+
+.oldImg {
+    /* display: flex;
+    flex-wrap: wrap; */
+    z-index: -1;
+}
+
+img {
+    border-radius: 2px;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+input {
+    margin-top: 1rem;
+    position: relative;
+    left: 100px;
+    width: 250px;
+    height: 35px;
+}
+
+input[type=file]::file-selector-button {
+    font-weight: bold;
+    background-color: rgb(221, 163, 161);
+    color: black;
+    padding: 0.5em;
+    border: thin solid grey;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+input[type=submit] {
+    font-weight: bold;
+    background-color: rgb(221, 163, 161);
+    color: black;
+    padding: 0.5em;
+    border: thin solid grey;
+    border-radius: 3px;
+    height: 50px;
+    width: 150px;
+    cursor: pointer;
+}
+
+#demo1 {
+    margin: 8px auto;
+}

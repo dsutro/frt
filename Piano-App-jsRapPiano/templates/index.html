@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 
+
 <head>
 	<meta charset="UTF-8">
 	<title>Demo</title>
@@ -11,63 +12,86 @@
 	<link rel="stylesheet" href="{{ url_for('static',filename='piano.css') }}" />
 	<link rel="stylesheet" href="{{ url_for('static',filename='index.css') }}" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script>
-
-	</script>
+	<!-- <script>
+	</script> -->
 </head>
 
 </html>
 
 <body>
-	<div id="divMain">
+	<div class="logo">
+		<img src="{{url_for('static', filename='logo-no-background.png')}}" alt="specto1" />
+	</div>
+	<div class="navbar">
+		<a href="./">Home</a>
+		<a href="#contributors">Contributors</a>
+		<a href="#resources">Recources</a>
+	</div>
+	<!-- <div id="divMain">
 		<div id="demo1"></div>
 		<div id="frequency"></div>
+	</div> -->
+	<div class="main">
+		<form action="http://localhost:5000/uploader" method="POST" enctype="multipart/form-data">
+			<!-- <img src ="testimage2.png" alt="specto1" width="150" height="100"/> -->
+			<!-- <img src ="{{url_for('static', filename='testimage2.png')}}" /> -->
+			<div class="row">
+				<div class="webBox">
+					<div class="directions">
+						<p>
+
+							Welcome to the FM Resynthesis Tool <br><br>
+							Start by uploading your own sound file using the upload button to the left <br> 
+							Next, wait for the sound to be processes <br>
+							Finally use the mouse, or computer keyboard to play your resynthesized sound!!
+						</p>
+					</div>
+				</div>
+				<div class="webBox">
+					<div class="fileSub">
+						<input type="file" name="file" />
+						<input type="submit" />
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="webBox">
+					<div class="oldImg">
+						<img src="{{url_for('static', filename='testimage.png')}}" alt="specto1" />
+					</div>
+				</div>
+				<div class="webBox">
+					<div class="newImg">
+						<img src="{{url_for('static', filename='testimage2.png')}}" alt="specto2" />
+					</div>
+				</div>
+			</div>
+			<div id="piano">
+				<div data-note="C0" id="a" class="white-key">A</div>
+				<div data-note="C#0" id="w" class="black-key">W</div>
+				<div data-note="D0" id="s" class="white-key a">S</div>
+				<div data-note="D#0" id="e" class="black-key">E</div>
+				<div data-note="E0" id="d" class="white-key a">D</div>
+				<div data-note="F0" id="f" class="white-key">F</div>
+				<div data-note="F#0" id="t" class="black-key">T</div>
+				<div data-note="G0" id="g" class="white-key a">G</div>
+				<div data-note="G#0" id="y" class="black-key">Y</div>
+				<div data-note="A0" id="h" class="white-key a">H</div>
+				<div data-note="A#0" id="u" class="black-key">U</div>
+				<div data-note="B0" id="j" class="white-key a">J</div>
+				<div data-note="C1" id="k" class="white-key">K</div>
+				<div data-note="C#1" id="o" class="black-key">O</div>
+				<div data-note="D1" id="l" class="white-key a">L</div>
+				<div data-note="D#1" id="p" class="black-key">P</div>
+				<div data-note="E1" id=";" class="white-key a">;</div>
+				<div data-note="F1" id="'" class="white-key">'</div>
+				<div id="z" class="oct-key">Z</div>
+				<div id="oct-minus">-</div>
+				<div id="x" class="oct-key">X</div>
+				<div id="oct-plus">+</div>
+				<div id="octave_div">Octave: <span id="dis-user-oct"></span></div>
+			</div>
 	</div>
-	<form action="http://localhost:5000/uploader" method="POST" enctype="multipart/form-data">
-		<!-- <img src ="testimage2.png" alt="specto1" width="150" height="100"/> -->
-		<!-- <img src ="{{url_for('static', filename='testimage2.png')}}" /> -->
-		<div class="directions">
-			<p>ANIMALS TSUNAMI</p>
-		</div>
-		<div class="fileSub">
-			<input type="file" name="file" />
-			<input type="submit" />
-		</div>
-		<div class="images">
-			<div class="photo">
-				<img src="{{url_for('static', filename='testimage.png')}}" alt="specto1" />
-			</div>
-			<div class="photo">
-				<img src="{{url_for('static', filename='testimage2.png')}}" alt="specto2" />
-			</div>
-		</div>
-		<div id="piano">
-			<div data-note="C0" id="a" class="white-key">A</div>
-			<div data-note="C#0" id="w" class="black-key">W</div>
-			<div data-note="D0" id="s" class="white-key a">S</div>
-			<div data-note="D#0" id="e" class="black-key">E</div>
-			<div data-note="E0" id="d" class="white-key a">D</div>
-			<div data-note="F0" id="f" class="white-key">F</div>
-			<div data-note="F#0" id="t" class="black-key">T</div>
-			<div data-note="G0" id="g" class="white-key a">G</div>
-			<div data-note="G#0" id="y" class="black-key">Y</div>
-			<div data-note="A0" id="h" class="white-key a">H</div>
-			<div data-note="A#0" id="u" class="black-key">U</div>
-			<div data-note="B0" id="j" class="white-key a">J</div>
-			<div data-note="C1" id="k" class="white-key">K</div>
-			<div data-note="C#1" id="o" class="black-key">O</div>
-			<div data-note="D1" id="l" class="white-key a">L</div>
-			<div data-note="D#1" id="p" class="black-key">P</div>
-			<div data-note="E1" id=";" class="white-key a">;</div>
-			<div data-note="F1" id="'" class="white-key">'</div>
-			<div id="z" class="oct-key">Z</div>
-			<div id="oct-minus">-</div>
-			<div id="x" class="oct-key">X</div>
-			<div id="oct-plus">+</div>
-			<div id="octave_div">Octave: <span id="dis-user-oct"></span></div>
-		</div>
 </body>
-
 <script src="{{ url_for('static',filename='jsRapPiano.js') }}"></script>
-
 </html>

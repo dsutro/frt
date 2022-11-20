@@ -2,7 +2,7 @@ const synth = new Tone.FMSynth({
 	//harmonicity  : 3 ,
 	modulationIndex  : 10 ,
 	detune  : 0 ,
-	harmonicity  : params.harmonicity ,
+	harmonicity  : params.harmonicity ,  //ratio between carrier and modulator frequecny
 	modulationIndex  : params.modulationIndex ,
 	// detune  : params.detune ,
 	oscillator  : {
@@ -34,6 +34,9 @@ const synth = new Tone.FMSynth({
 	release  : params.mod_release
 	}
 });
+
+
+
 
 
 
