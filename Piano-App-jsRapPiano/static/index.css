@@ -1,0 +1,96 @@
+body{background-color:lightgrey;}
+#divMain{
+margin:auto;
+width:80%;
+bottom: 0;
+position: absolute;
+}
+
+.images {
+    align-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 50px;
+    padding: 30px;
+    /* vertical-align: top; */
+}
+.photo {
+    /* max-width: 40%; */
+    width: 350px;
+    /* padding: 0 10px; */
+    margin-right: 15px;
+    height: 200px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.photo img {
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.directions {
+    float: left;
+    width: 350px;
+    height: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 50px;
+    margin-right: 50px;
+    border-radius: 5px;
+    border: 1px solid black;
+    background-color: ivory;
+}
+.fileSub {
+    width: 350px;
+    height: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 50px;
+    margin-right: 50px;
+    border-radius: 5px;
+    border: 1px solid black;
+    background-color: ivory;
+}
+
+/* #divGitHub{
+top:0px;
+right:0px;
+width:200px;
+height:200px;
+overflow:hidden;
+position:absolute;
+z-index:100;
+pointer-events:none;
+}
+#GitHub{
+background-color:#800;	
+border:solid 2px black;	
+color:white;
+cursor:pointer;
+font:bold 14px Arial,Helvetica,sans-serif;
+height:20px;
+padding-top:3px;
+position:absolute;
+right:60px;
+text-align: center;
+transform:translate(50%,-50%) rotate(45deg);
+text-shadow: 0 0 8px black;
+top:60px;
+width:240px;
+-webkit-touch-callout: none;
+-webkit-user-select: none;
+-moz-user-select: none;
+pointer-events:auto;
+}
+#GitHub:after{
+content:'Star me on GitHub';
+}
+#GitHub:hover{
+background-color:#f00;
+} */
+#demo1{
+margin:8px auto;
+}
+
