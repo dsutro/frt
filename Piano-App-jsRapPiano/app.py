@@ -69,7 +69,7 @@ def upload_file():
       #print(final_dict)
       params = {
         "harmonicity" : 2.5 ,
-        "modulationIndex" : 10 ,
+        "modulationIndex" : final_dict["index"] ,
         "detune" : 0 ,
         "car_type" : "sine" ,
         "amp_attack" : 0.01 ,
@@ -80,7 +80,7 @@ def upload_file():
         "mod_attack" : final_dict["attack"] ,
         "mod_decay" : 0 ,
         "mod_sustain" : 1 ,
-        "mod_release" : 10
+        "mod_release" : final_dict["release"]
       }
       return render_template("index.html",params=params)
 
