@@ -67,10 +67,13 @@ def fitness_job(self, iter, i):
     """Fitness job to run fitness function in parallel"""
     print(f"iter {iter} i {i}")
     fname = f"../tmp/temp_audio_gen_{iter}_"
-    fitness = (self.fitness_func(self.to_phenotype(self.population[i], self.duration, self.sr, fname), self.target_mfcc), self.population[i])
-    self.fitness[i] = fitness
+    fitness_dtw = self.fitness_func[0](self.to_phenotype(self.population[i], self.duration, self.sr, fname), self.target_features[0])
+    fitness_euc = self.fitness_func[1](self.to_phenotype(self.population[i], self.duration, self.sr, fname), self.target_features[1])
+    print(f"dtw {type(fitness_dtw)} {fitness_dtw}")
+    print(f"euc {type(fitness_euc)} {fitness_euc}")
+    self.fitness[i] = ((fitness_dtw + fitness_euc) / 2, self.population[i])
     # print(f"Updating individual {i}: {self.fitness[i]}")
-    return fitness
+    return ((fitness_dtw + fitness_euc) / 2, self.population[i])
 
 
 # genetic algorithm  ---------------------------------------------------------------------
@@ -89,23 +92,21 @@ class GeneticAlgorithm:
         self.mutate = mutate
         self.target_fname = target_fname
         self.target_fingerprint = None
-        self.target_features = None
+        self.target_features = []
         self.sr = 44100
 
         # try to get target features
         try:
             # TODO: trim spectral featurs and duration to when sound is being produced
             sound = AudioSegment.from_file(self.target_fname, format="wav")
-
             start_trim = detect_leading_silence(sound)
             end_trim = detect_leading_silence(sound.reverse())   
             trimmed_sound = sound[start_trim:len(sound)-end_trim]
             trimmed_sound.export(out_f= "trimmed_target.wav",
                                 format = "wav")
-            self.target_features = spectral_features("trimmed_target.wav")
             self.duration = len(trimmed_sound)*1e-3
             target_synth, self.sr = librosa.load("trimmed_target.wav")
-            self.target_mfcc = librosa.feature.mfcc(target_synth, self.sr)
+            self.target_features = (librosa.feature.mfcc(target_synth, self.sr), spectral_features("trimmed_target.wav"))
             print(self.duration)
         except Exception as e:
             print(f'Genetic Algorithm initialization failed due to : {e}')
@@ -146,6 +147,8 @@ class GeneticAlgorithm:
                 self.fitness = p.starmap(fitness_job, zip(arg1, arg2, arg3))
                 p.close()
                 p.join()
+
+            
 
             # adjust fitness (when using spectral features)
             print(f"Fitness calc done\n{self.fitness}")

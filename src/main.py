@@ -85,16 +85,19 @@ def run_ga(target_fname, generations=10, population_size=10, mutation_prob=0.05)
   ga = genalg.GeneticAlgorithm(target_fname)
   ga.to_phenotype = to_phenotype
   ga.random_individual = random_individual
-  ga.fitness_func = fitness_fnc_dtw
+  ga.fitness_func = (fitness_fnc_dtw, fitness_fnc_euc)
   pop = ga.evolve(iters=generations, population_size=population_size, mutation_prob=mutation_prob)
 
   # return best set of params
-  params = {'carrier': ga.fitness[0][1][0], 
-            'modulator': ga.fitness[0][1][1], 
-            'index': ga.fitness[0][1][2],
-            'attack': ga.fitness[0][1][3],
-            'release': ga.fitness[0][1][4]}
+  fitness = [individual[0] for individual in pop]
+  individual = fitness.index(min(fitness))
+  params = {'carrier': ga.fitness[individual][1][0], 
+            'modulator': ga.fitness[individual][1][1], 
+            'index': ga.fitness[individual][1][2],
+            'attack': ga.fitness[individual][1][3],
+            'release': ga.fitness[individual][1][4]}
   # cleanup
+  print("Cleaning up...")
   files = glob.glob('../tmp/*/.wav', recursive=True)
   for f in files:
       try:
@@ -109,7 +112,7 @@ def test_ga(target_fname, generations=10, population_size=10, mutation_prob=0.05
   ga = genalg.GeneticAlgorithm(target_fname)
   ga.to_phenotype = to_phenotype
   ga.random_individual = random_individual
-  ga.fitness_func = fitness_fnc_dtw
+  ga.fitness_func = (fitness_fnc_dtw, fitness_fnc_euc)
   pop = ga.evolve(iters=generations, population_size=population_size, mutation_prob=mutation_prob)
 
   # cleanup
@@ -119,7 +122,7 @@ def test_ga(target_fname, generations=10, population_size=10, mutation_prob=0.05
           os.remove(f)
       except OSError as e:
           print("Error: %s : %s" % (f, e.strerror))
-          
+
   return min([individual[0] for individual in pop])
 
 
