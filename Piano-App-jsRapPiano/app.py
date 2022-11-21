@@ -67,16 +67,17 @@ def upload_file():
       #print(pth)
       final_dict = run_ga(pth)
       #print(final_dict)
+      backendHarmonicity = final_dict["modulator"]/final_dict["carrier"]
       params = {
-        "harmonicity" : 2.5 ,
+        "harmonicity" : backendHarmonicity ,
         "modulationIndex" : final_dict["index"] ,
         "detune" : 0 ,
         "car_type" : "sine" ,
-        "amp_attack" : 0.01 ,
+        "amp_attack" : final_dict["attack"] ,
         "amp_decay" : 0.01 ,
         "amp_sustain" : 1 ,
-        "amp_release" : 5 ,
-        "mod_type" : "square" ,
+        "amp_release" : final_dict["release"] ,
+        "mod_type" : "sine" ,
         "mod_attack" : final_dict["attack"] ,
         "mod_decay" : 0 ,
         "mod_sustain" : 1 ,
