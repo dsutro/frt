@@ -41,7 +41,7 @@
 						<p>
 
 							Welcome to the FM Resynthesis Tool <br><br>
-							Start by uploading your own sound file using the upload button to the left <br> 
+							Start by uploading your own sound file using the upload button to the left <br>
 							Next, wait for the sound to be processes <br>
 							Finally use the mouse, or computer keyboard to play your resynthesized sound!!
 						</p>
@@ -49,8 +49,20 @@
 				</div>
 				<div class="webBox">
 					<div class="fileSub">
-						<input type="file" name="file" />
+						<input type="file" name="file" id="upload"/>
 						<input type="submit" />
+						<audio id="audio" controls>
+							<source src="" id="src" />
+						</audio>
+						<script>
+							function handleFiles(event) {
+								var files = event.target.files;
+								$("#src").attr("src", URL.createObjectURL(files[0]));
+								document.getElementById("audio").load();
+							}
+
+							document.getElementById("upload").addEventListener("change", handleFiles, false);
+						</script>
 					</div>
 				</div>
 			</div>
@@ -94,4 +106,5 @@
 	</div>
 </body>
 <script src="{{ url_for('static',filename='jsRapPiano.js') }}"></script>
+
 </html>

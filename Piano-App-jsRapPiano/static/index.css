@@ -1,21 +1,29 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+
 body {
-    background: rgba(64,64,102, .5);
+    background: rgba(64, 64, 102, .5);
     font-family: 'Roboto', sans-serif;
     /* background: linear-gradient(0deg, rgba(223,102,98,0.49763655462184875) 0%, rgba(64,64,102,0.500437675070028) 100%); */
 }
+
 p {
     padding-left: 10px;
     padding-right: 10px;
 }
 
-.test{
-    background-color: #471D75ff;/* blue violet */
-    background-color: #FFFFFFff;/* white */
-    background-color: #702D58ff;/* byzantium */
-    background-color: #DF6662ff;/* fuzzy wuzzy */
-    background-color: #FCF7C1ff;/* blond */
-    background-color: #fffcdd;/* white-blond */
+.test {
+    background-color: #471D75ff;
+    /* blue violet */
+    background-color: #FFFFFFff;
+    /* white */
+    background-color: #702D58ff;
+    /* byzantium */
+    background-color: #DF6662ff;
+    /* fuzzy wuzzy */
+    background-color: #FCF7C1ff;
+    /* blond */
+    background-color: #fffcdd;
+    /* white-blond */
 }
 
 .navbar {
@@ -115,6 +123,19 @@ p {
     display: flex;
     flex-wrap: wrap;
     /* z-index: ; */
+}
+
+#audio {
+    position: relative;
+    left: 25px;
+}
+
+audio::-webkit-media-controls-panel {
+    background-color: #fffcdd;
+}
+
+audio:focus {
+    outline: none;
 }
 
 .oldImg {
