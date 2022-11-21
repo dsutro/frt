@@ -1,0 +1,118 @@
+ @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+ body {
+     font-family: 'Roboto', sans-serif;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     min-height: 100vh;
+}
+#piano{
+    margin: auto;
+    position: relative;
+    top: 0px;
+    bottom: -150px;
+    left: 100px;
+}
+ div {
+     list-style: none;
+     display: flex;
+}
+div .spacing{
+    position: relative;
+    width: -60px;
+    right: 100px;
+}
+ div .white-key {
+     position: relative;
+     width: 60px;
+     height: 180px;
+     border: 1px solid black;
+     border-right: none;
+     background: #fffff0;
+     border-radius: 5px;
+     box-shadow: 0px 3px 5px #666;
+     z-index: 1;
+     cursor: pointer;
+     display: flex;
+     justify-content: center;
+     align-items: flex-end;
+     padding-bottom: 10px;
+     font-weight: bold;
+}
+ .white-key:active,
+ div .white-key.active{
+    background: rgb(226, 226, 226);
+}
+ /* div .key:last-child {
+     border-right: 1px solid black;
+} */
+ div .black-key {
+     position: relative;
+     top: px;
+     right: 22px;
+     width: 45px;
+     height: 120px;
+     /* margin-left: 16; */
+     background: black;
+     border-radius: 5px;
+     box-shadow: 0px 3px 5px #666;
+     z-index: 2;
+     display: flex;
+     justify-content: center;
+     align-items: flex-end;
+     padding-bottom: 10px;
+     color: white;
+}
+
+.a{
+    margin: 0 0 0 -45px;
+    box-shadow:inset 0px 0px 8px #000;
+}
+.black-key:active,
+div .black-key.active{
+    background: rgb(79, 79, 79);
+} 
+
+div .oct-key{
+    position: relative;
+    right: 630px;
+    top: 200px;
+    width: 60px;
+    height: 50px;
+    border: 1px solid black;
+    background: #ffe748;
+    border-radius: 5px;
+    box-shadow: 0px 3px 5px #666;
+    z-index: 2;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+.oct-key:active,
+div .oct-key.active{
+    background: #b8a734;
+}
+
+div #octave_div {
+    position: relative;
+    right: 600px;
+    top: 225px;
+}
+
+div #oct-plus {
+    position: relative;
+    right: 685px;
+    top: 200px;
+    z-index: 3;
+}
+
+div #oct-minus {
+    position: relative;
+    right: 642px;
+    top: 195px;
+    font-size: 25px;
+    z-index: 3;
+}
