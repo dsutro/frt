@@ -55,6 +55,26 @@ def to_phenotype(genotype, duration, sr, fname='temp_audio'):
         sf.write(fname, y, sr, 'PCM_24')
         return fname
 
+def to_params(genotype, duration, sr):
+        """Convert genotype to sound using FM synthesis."""
+            
+        # scale values
+        carrier   = mf.scale(genotype[0], 1, 10000, kind='exp')  # carrier freq
+        modulator = mf.scale(genotype[1], 1, 10000, kind='exp')  # modulator freq 
+        index1    = mf.scale(genotype[2], 1, 100, kind='exp')    # index start
+        # index2    = mf.scale(genotype[3], 1, 100, kind='exp')    # index end
+        attack    = mf.scale(genotype[3], 0.01, 5, kind='exp')   # attack
+        release   = mf.scale(genotype[4], 0.01, 5, kind='exp')   # release
+
+        # randomly use attack or release to ensure target duration
+        check = random.random()
+        if (check > 0.5):
+            release = abs(duration - attack)
+        else:
+            attack = abs(duration - release)
+
+        return carrier, modulator, index1, attack, release
+
 def fitness_fnc_euc(synth_fname, target_features):
   # euc_fnc = lambda x, y: (x**2 - y**2)
   euc_fnc = lambda x, y: math.sqrt(sum([(xx - yy)**2 for xx, yy in zip(x, y)]))
@@ -91,11 +111,12 @@ def run_ga(target_fname, generations=10, population_size=10, mutation_prob=0.05)
   # return best set of params
   fitness = [individual[0] for individual in pop]
   individual = fitness.index(min(fitness))
-  params = {'carrier': ga.fitness[individual][1][0], 
-            'modulator': ga.fitness[individual][1][1], 
-            'index': ga.fitness[individual][1][2],
-            'attack': ga.fitness[individual][1][3],
-            'release': ga.fitness[individual][1][4]}
+  carrier, modulator, index1, attack, release = to_params(individual, ga.duration, ga.sr)
+  params = {'carrier': carrier, 
+            'modulator': modulator, 
+            'index': index1,
+            'attack': attack,
+            'release': release}
   # cleanup
   print("Cleaning up...")
   files = glob.glob('../tmp/*/.wav', recursive=True)
