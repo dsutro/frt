@@ -14,24 +14,7 @@ from numpy.linalg import norm
 from scipy.io.wavfile import write
 import soundfile as sf
 from listen import spectral_features
-
-def initialize():
-  """ takes user input """
-  parser = argparse.ArgumentParser()
-  parser.add_argument("-t ", "--target-file", help="target file")
-  args = parser.parse_args()
-
-  target_file = args.target_file if args.target_file else None
-  if not target_file:
-    raise Exception("Target files not specified.")
-
-  # create a genetic algorithm object
-  ga = genalg.GeneticAlgorithm(target_file)
-  ga.to_phenotype = to_phenotype
-  ga.random_individual = random_individual
-  ga.fitness_func = fitness_fnc_dtw
-
-  return ga
+import pytest
 
 def random_individual():
   """Generate random genotype 6 values in range [0,1]."""
@@ -60,7 +43,7 @@ def to_phenotype(genotype, duration, sr, fname='temp_audio'):
         else:
             attack = abs(duration - release)
 
-        print(f"dur:{duration}\nsr: {sr}\natt: {attack}\nrel: {release}\ncarrier: {carrier}\nmod: {modulator}\nindex: {index1}")
+        # print(f"dur:{duration}\nsr: {sr}\natt: {attack}\nrel: {release}\ncarrier: {carrier}\nmod: {modulator}\nindex: {index1}")
         
         # synthesize audio using FM synthesis
         y = synths.fm(carrier=carrier, modulator=modulator, index1=index1, 
@@ -85,7 +68,7 @@ def fitness_fnc_euc(synth_fname, target_features):
     score += euc_fnc(target_features[key][:cut_i], synth_features[key][:cut_i])
 
   score = (score / len(target_features.keys()))
-  print(score)
+  # print(score)
   return score
 
 def fitness_fnc_dtw(synth_fname, target_mfcc):
@@ -102,7 +85,7 @@ def run_ga(target_fname, generations=10, population_size=10, mutation_prob=0.05)
   ga.random_individual = random_individual
   ga.fitness_func = fitness_fnc_dtw
   pop = ga.evolve(iters=generations, population_size=population_size, mutation_prob=mutation_prob)
-
+  # print(pop)
   # return best set of params
   params = {'carrier': ga.fitness[0][1][0], 
             'modulator': ga.fitness[0][1][1], 
@@ -111,10 +94,18 @@ def run_ga(target_fname, generations=10, population_size=10, mutation_prob=0.05)
             'release': ga.fitness[0][1][4]}
   return params
 
+def test_ga(target_fname, generations=10, population_size=10, mutation_prob=0.05):
+  # create a genetic algorithm object
+  ga = genalg.GeneticAlgorithm(target_fname)
+  ga.to_phenotype = to_phenotype
+  ga.random_individual = random_individual
+  ga.fitness_func = fitness_fnc_dtw
+  pop = ga.evolve(iters=generations, population_size=population_size, mutation_prob=mutation_prob)
+  return min([individual[0] for individual in pop])
 
 
 if __name__ == '__main__':
   params = run_ga('../assets/sine.wav')
-  print(params)
+  # print(params)
 
   

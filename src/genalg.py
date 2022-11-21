@@ -65,10 +65,11 @@ def mutate(genotype, mutation_prob=0.01, inbreeding_prob=0.5, verbose=True):
 
 def fitness_job(self, iter, i):
     """Fitness job to run fitness function in parallel"""
+    print(f"iter {iter} i {i}")
     fname = f"../scratch/temp/temp_audio_gen_{iter}_"
     fitness = (self.fitness_func(self.to_phenotype(self.population[i], self.duration, self.sr, fname), self.target_mfcc), self.population[i])
     self.fitness[i] = fitness
-    print(f"Updating individual {i}: {self.fitness[i]}")
+    # print(f"Updating individual {i}: {self.fitness[i]}")
     return fitness
 
 
