@@ -15,6 +15,8 @@ from scipy.io.wavfile import write
 import soundfile as sf
 from listen import spectral_features
 import pytest
+import glob
+import os
 
 def random_individual():
   """Generate random genotype 6 values in range [0,1]."""
@@ -85,13 +87,21 @@ def run_ga(target_fname, generations=10, population_size=10, mutation_prob=0.05)
   ga.random_individual = random_individual
   ga.fitness_func = fitness_fnc_dtw
   pop = ga.evolve(iters=generations, population_size=population_size, mutation_prob=mutation_prob)
-  # print(pop)
+
   # return best set of params
   params = {'carrier': ga.fitness[0][1][0], 
             'modulator': ga.fitness[0][1][1], 
             'index': ga.fitness[0][1][2],
             'attack': ga.fitness[0][1][3],
             'release': ga.fitness[0][1][4]}
+  # cleanup
+  files = glob.glob('../tmp/*/.wav', recursive=True)
+  for f in files:
+      try:
+          os.remove(f)
+      except OSError as e:
+          print("Error: %s : %s" % (f, e.strerror))
+  
   return params
 
 def test_ga(target_fname, generations=10, population_size=10, mutation_prob=0.05):
@@ -101,6 +111,15 @@ def test_ga(target_fname, generations=10, population_size=10, mutation_prob=0.05
   ga.random_individual = random_individual
   ga.fitness_func = fitness_fnc_dtw
   pop = ga.evolve(iters=generations, population_size=population_size, mutation_prob=mutation_prob)
+
+  # cleanup
+  files = glob.glob('../tmp/*/.wav', recursive=True)
+  for f in files:
+      try:
+          os.remove(f)
+      except OSError as e:
+          print("Error: %s : %s" % (f, e.strerror))
+          
   return min([individual[0] for individual in pop])
 
 
