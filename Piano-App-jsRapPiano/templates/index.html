@@ -19,6 +19,9 @@
 </html>
 
 <body>
+	<div class="loader-wrapper" id="lwrap">
+		<span class="loader"><span class="loader-inner"></span></span>
+	</div>
 	<div class="logo">
 		<img src="{{url_for('static', filename='logo-no-background.png')}}" alt="specto1" />
 	</div>
@@ -48,9 +51,9 @@
 					</div>
 				</div>
 				<div class="webBox">
-					<div class="fileSub">
-						<input type="file" name="file" id="upload"/>
-						<input type="submit" />
+					<div class="fileSub" id="fsub">
+						<input type="file" name="file" id="upload" />
+						<input type="submit" id="suButton"/>
 						<audio id="audio" controls>
 							<source src="" id="src" />
 						</audio>
@@ -104,6 +107,14 @@
 				<div id="octave_div">Octave: <span id="dis-user-oct"></span></div>
 			</div>
 	</div>
+	<script>
+		$(".loader-wrapper").hide();
+		$(document).ready(function () {
+			$("#suButton").click(function () {
+				$(".loader-wrapper").show();
+			});
+		});
+	</script>
 </body>
 <script src="{{ url_for('static',filename='jsRapPiano.js') }}"></script>
 
