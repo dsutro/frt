@@ -65,7 +65,14 @@
 								document.getElementById("audio").load();
 							}
 
-							document.getElementById("upload").addEventListener("change", handleFiles, false);
+							$(document).ready(function () {
+							    var audioElement = document.createElement('audio');
+    							audioElement.setAttribute('src', 'static/mp3files/file_0.mp3');
+								$("#playSound").click(function () {
+									$("#playSound").css("background-color", "red");
+									audioElement.play()
+								});
+							});
 						</script>
 					</div>
 				</div>
