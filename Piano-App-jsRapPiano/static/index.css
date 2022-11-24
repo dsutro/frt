@@ -125,6 +125,7 @@ p {
     /* z-index: ; */
 }
 
+/* audio play button style */
 #audio {
     position: relative;
     left: 25px;
@@ -136,6 +137,23 @@ audio::-webkit-media-controls-panel {
 
 audio:focus {
     outline: none;
+}
+
+#playSound {
+    position: relative;
+    top: 70px;
+    left: -50px;
+    height: 25px;
+    width: 150px;
+    font-weight: bold;
+    background-color: rgb(221, 163, 161);
+    color: black;
+    padding: 0.5em;
+    border: thin solid grey;
+    border-radius: 3px;
+    /* position: relative;
+    left: 25px; */
+    cursor: pointer;
 }
 
 .oldImg {
@@ -185,6 +203,7 @@ input[type=submit] {
     border-radius: 3px;
     height: 50px;
     width: 150px;
+    top: -20px;
     cursor: pointer;
 }
 
