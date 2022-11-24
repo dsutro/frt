@@ -62,8 +62,8 @@ def upload_file():
       file_number.write(str(num+1))
       file_number.close()
       fname = "file_{}.mp3".format(num)
-      f.save(os.path.join(app.instance_path, 'mp3files', secure_filename(fname)))
-      f.save(os.path.join(app.instance_path, 'mp3files', secure_filename("file_0.mp3")))
+      f.save(os.path.join('static', 'mp3files', secure_filename(fname)))
+      f.save(os.path.join('static', 'mp3files', secure_filename("file_0.mp3")))
       pth = "instance/mp3files/" + fname
       #print(pth)
       final_dict = run_ga(pth)
