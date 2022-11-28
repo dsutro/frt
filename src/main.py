@@ -99,7 +99,7 @@ def fitness_fnc_dtw(synth_fname, target_mfcc):
   dist, cost, acc_cost, path = dtw(synth_mfcc.T, target_mfcc.T, dist=lambda x, y: norm(x - y, ord=1))
   return dist
 
-def run_ga(target_fname, generations=10, population_size=10, mutation_prob=0.05):
+def run_ga(target_fname, generations=10, population_size=10, mutation_prob=0.05, verbose=False):
   """Wrapper to run GA from flask"""
   # create a genetic algorithm object
   ga = genalg.GeneticAlgorithm(target_fname)
@@ -111,24 +111,24 @@ def run_ga(target_fname, generations=10, population_size=10, mutation_prob=0.05)
   # return best set of params
   fitness = [individual[0] for individual in pop]
   individual = fitness.index(min(fitness))
-  carrier, modulator, index1, attack, release = to_params(individual, ga.duration, ga.sr)
+  carrier, modulator, index1, attack, release = to_params(pop[individual], ga.duration, ga.sr)
   params = {'carrier': carrier, 
             'modulator': modulator, 
             'index': index1,
             'attack': attack,
             'release': release}
   # cleanup
-  print("Cleaning up...")
+  if verbose: print("Cleaning up...")
   files = glob.glob('../tmp/*/.wav', recursive=True)
   for f in files:
       try:
           os.remove(f)
       except OSError as e:
-          print("Error: %s : %s" % (f, e.strerror))
+          if verbose: print("Error: %s : %s" % (f, e.strerror))
   
   return params
 
-def test_ga(target_fname, generations=10, population_size=10, mutation_prob=0.05):
+def test_ga(target_fname, generations=10, population_size=10, mutation_prob=0.05, verbose=False):
   # create a genetic algorithm object
   ga = genalg.GeneticAlgorithm(target_fname)
   ga.to_phenotype = to_phenotype
@@ -142,7 +142,7 @@ def test_ga(target_fname, generations=10, population_size=10, mutation_prob=0.05
       try:
           os.remove(f)
       except OSError as e:
-          print("Error: %s : %s" % (f, e.strerror))
+          if verbose: print("Error: %s : %s" % (f, e.strerror))
 
   return min([individual[0] for individual in pop])
 
