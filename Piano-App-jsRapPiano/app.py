@@ -4,6 +4,7 @@ import json
 from werkzeug.utils import secure_filename
 from flask import request
 from main import run_ga
+from main import create_spectrogram
 
 from flask import Flask, render_template, jsonify
 
@@ -62,12 +63,15 @@ def upload_file():
       file_number.seek(0)
       file_number.write(str(num+1))
       file_number.close()
-      fname = "file_{}.mp3".format(num)
+      fname = "file_{}.wav".format(num)
       f.save(os.path.join('static', 'mp3files', secure_filename(fname)))
       pth = "static/mp3files/" + fname
       shutil.copy(pth,'static/mp3files/file_0.mp3')
+      source_sound = pth
       #print(pth)
+      create_spectrogram(pth, True)
       final_dict = run_ga(pth)
+
       #print(final_dict)
       backendHarmonicity = final_dict["modulator"]/final_dict["carrier"]
       params = {
@@ -83,8 +87,13 @@ def upload_file():
         "mod_attack" : final_dict["attack"] ,
         "mod_decay" : 0 ,
         "mod_sustain" : 1 ,
-        "mod_release" : final_dict["release"]
+        "mod_release" : final_dict["release"] ,
+        "individual" : final_dict["individual"]
       }
+      resynthesized_sound = "../tmp/temp_audio_gen_9_" + str(params["individual"]) + ".wav"
+
+      create_spectrogram(resynthesized_sound, False)
+
       return render_template("index.html",params=params)
 
 if __name__ == '__main__':

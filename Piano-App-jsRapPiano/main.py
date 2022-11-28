@@ -4,6 +4,9 @@ import synths
 import musicfuncs as mf
 import time
 import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plot
 import random
 import math
 import librosa
@@ -12,10 +15,61 @@ import numpy as np
 from dtw import dtw
 from numpy.linalg import norm
 from scipy.io.wavfile import write
+from scipy.io import wavfile
 import soundfile as sf
 import pytest
 import glob
 import os
+
+def create_spectrogram(file_name, is_target):
+  # plot.use('SVG')
+  # print(file_name)
+  # samplingFrequency, signalData = wavfile.read(file_name)
+  # # Plot the signal read from wav file
+  # plot.subplot(211)
+  # plot.title('Spectrogram of a wav file')
+  # plot.plot(signalData)
+  # plot.xlabel('Sample')
+  # plot.ylabel('Amplitude')
+  # plot.subplot(212)
+  # plot.specgram(signalData,Fs=samplingFrequency, cmap='magma_r')
+  # plot.xlabel('Time')
+  # plot.ylabel('Frequency')
+  # plot.show()
+  if(is_target):
+    samplingFrequency, signalData = wavfile.read(file_name)
+    # Plot the signal read from wav file
+    plot.subplot(211)
+    plot.title('Spectrogram of a target wav file')
+    plot.plot(signalData)
+    plot.xlabel('Sample')
+    plot.ylabel('Amplitude')
+    plot.subplot(212)
+    plot.specgram(signalData,Fs=samplingFrequency, cmap='magma_r')
+    plot.xlabel('Time')
+    plot.ylabel('Frequency')
+    # save as target.png
+    plot.savefig('static/target.png')
+    plot.clf()
+    plot.cla()
+    plot.close()
+  if(not is_target):
+    samplingFrequency, signalData = wavfile.read(file_name)
+    # Plot the signal read from wav file
+    plot.subplot(211)
+    plot.title('Spectrogram of a resynthesized wav file')
+    plot.plot(signalData)
+    plot.xlabel('Sample')
+    plot.ylabel('Amplitude')
+    plot.subplot(212)
+    plot.specgram(signalData,Fs=samplingFrequency, cmap='magma_r')
+    plot.xlabel('Time')
+    plot.ylabel('Frequency')
+    # save as resynth.png
+    plot.savefig('static/resynth.png')
+    plot.clf()
+    plot.cla()
+    plot.close()
 
 def random_individual():
   """Generate random genotype 6 values in range [0,1]."""

@@ -69,7 +69,6 @@
 							    var audioElement = document.createElement('audio');
     							audioElement.setAttribute('src', 'static/mp3files/file_0.mp3');
 								$("#playSound").click(function () {
-									$("#playSound").css("background-color", "red");
 									audioElement.play()
 								});
 							});
@@ -78,14 +77,14 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="webBox">
+				<div class="webBoximg" >
 					<div class="oldImg">
-						<img src="{{url_for('static', filename='testimage.png')}}" alt="specto1" />
+						<img src="{{url_for('static', filename='target.png')}}" alt="specto1" />
 					</div>
 				</div>
-				<div class="webBox">
+				<div class="webBoximg">
 					<div class="newImg">
-						<img src="{{url_for('static', filename='testimage2.png')}}" alt="specto2" />
+						<img src="{{url_for('static', filename='resynth.png')}}" alt="specto2" />
 					</div>
 				</div>
 			</div>
