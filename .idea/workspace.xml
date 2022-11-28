@@ -5,107 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc495c42-2c52-4e3b-a4c2-56756192cf6f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Piano-App-jsRapPiano/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Piano-App-jsRapPiano/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Piano-App-jsRapPiano/file_count" beforeDir="false" afterPath="$PROJECT_DIR$/Piano-App-jsRapPiano/file_count" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Piano-App-jsRapPiano/trimmed_target.wav" beforeDir="false" afterPath="$PROJECT_DIR$/Piano-App-jsRapPiano/trimmed_target.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_0_13.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_0_13.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_0_23.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_0_23.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_0_29.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_0_29.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_0_36.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_0_36.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_0_40.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_0_40.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_0_52.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_0_52.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_0_53.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_0_53.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_0_63.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_0_63.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_0_65.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_0_65.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_0_76.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_0_76.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_0_82.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_0_82.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_1_15.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_1_15.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_1_20.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_1_20.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_1_25.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_1_25.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_1_28.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_1_28.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_1_48.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_1_48.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_1_53.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_1_53.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_1_54.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_1_54.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_1_7.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_1_7.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_1_73.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_1_73.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_1_77.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_1_77.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_1_81.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_1_81.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_2_10.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_2_10.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_2_18.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_2_18.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_2_28.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_2_28.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_2_51.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_2_51.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_2_71.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_2_71.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_2_89.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_2_89.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_2_92.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_2_92.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_2_95.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_2_95.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_3_12.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_3_12.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_3_28.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_3_28.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_3_34.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_3_34.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_3_72.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_3_72.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_3_76.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_3_76.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_3_80.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_3_80.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_3_84.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_3_84.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_3_85.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_3_85.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_3_88.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_3_88.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_4_1.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_4_1.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_4_35.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_4_35.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_4_42.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_4_42.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_4_49.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_4_49.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_4_5.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_4_5.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_4_69.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_4_69.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_4_78.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_4_78.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_5_14.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_5_14.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_5_19.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_5_19.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_5_2.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_5_2.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_5_55.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_5_55.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_5_62.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_5_62.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_5_65.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_5_65.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_5_75.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_5_75.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_5_92.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_5_92.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_5_94.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_5_94.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_6_16.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_6_16.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_6_19.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_6_19.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_6_5.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_6_5.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_6_62.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_6_62.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_6_65.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_6_65.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_6_70.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_6_70.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_6_75.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_6_75.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_6_77.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_6_77.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_6_82.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_6_82.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_6_83.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_6_83.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_11.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_11.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_16.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_16.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_19.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_19.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_23.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_23.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_24.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_24.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_25.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_25.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_38.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_38.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_4.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_4.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_49.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_49.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_63.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_63.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_64.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_64.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_77.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_77.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_79.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_79.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_80.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_80.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_96.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_7_96.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_8_13.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_8_13.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_8_15.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_8_15.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_8_17.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_8_17.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_8_20.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_8_20.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_8_30.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_8_30.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_8_42.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_8_42.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_8_83.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_8_83.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_8_99.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_8_99.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_9_0.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_9_0.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_9_15.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_9_15.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_9_16.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_9_16.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_9_17.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_9_17.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_9_2.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_9_2.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_9_21.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_9_21.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_9_22.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_9_22.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_9_49.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_9_49.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_9_94.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_9_94.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_9_98.wav" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/temp/temp_audio_gen_9_98.wav" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,13 +25,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/dempr/Desktop/temp_frt"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/dempr/Desktop/temp_frt&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="frt" />
