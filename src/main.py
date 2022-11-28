@@ -27,7 +27,7 @@ def random_individual():
   # return it
   return genotype
 
-def to_phenotype(genotype, duration, sr, fname='temp_audio'):
+def to_phenotype(individual, genotype, duration, sr, fname='temp_audio'):
         """Convert genotype to sound using FM synthesis."""
             
         # scale values
@@ -51,7 +51,7 @@ def to_phenotype(genotype, duration, sr, fname='temp_audio'):
         y = synths.fm(carrier=carrier, modulator=modulator, index1=index1, 
                         index2=0, attack=attack, release=release)
       
-        fname = fname + f"{int(random.random()*100)}.wav"
+        fname = fname + f"{individual}.wav"
         sf.write(fname, y, sr, 'PCM_24')
         return fname
 
@@ -116,7 +116,8 @@ def run_ga(target_fname, generations=10, population_size=10, mutation_prob=0.05,
             'modulator': modulator, 
             'index': index1,
             'attack': attack,
-            'release': release}
+            'release': release,
+            'individual': individual}
   # cleanup
   if verbose: print("Cleaning up...")
   files = glob.glob('../tmp/*/.wav', recursive=True)

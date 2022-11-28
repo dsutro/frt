@@ -66,8 +66,8 @@ def fitness_job(self, iter, i, verbose=False):
     """Fitness job to run fitness function in parallel"""
     if verbose: print(f"iter {iter} i {i}")
     fname = f"../tmp/temp_audio_gen_{iter}_"
-    fitness_dtw = self.fitness_func[0](self.to_phenotype(self.population[i], self.duration, self.sr, fname), self.target_features[0])
-    fitness_euc = self.fitness_func[1](self.to_phenotype(self.population[i], self.duration, self.sr, fname), self.target_features[1])
+    fitness_dtw = self.fitness_func[0](self.to_phenotype(i, self.population[i], self.duration, self.sr, fname), self.target_features[0])
+    fitness_euc = self.fitness_func[1](self.to_phenotype(i, self.population[i], self.duration, self.sr, fname), self.target_features[1])
     if verbose: print(f"dtw {type(fitness_dtw)} {fitness_dtw}")
     if verbose: print(f"euc {type(fitness_euc)} {fitness_euc}")
     self.fitness[i] = ((fitness_dtw + fitness_euc) / 2, self.population[i])
