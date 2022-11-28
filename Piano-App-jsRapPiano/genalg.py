@@ -12,9 +12,7 @@ from pydub import AudioSegment
 
 # local
 import synths
-#from listen import spectral_features, detect_leading_silence
-from listen import detect_leading_silence
-
+from listen import spectral_features, detect_leading_silence
 import musicfuncs as mf
 
 # global ---------------------
@@ -32,7 +30,6 @@ def to_phenotype(genotype):
 
 def to_weight(fitness, m=100, b=1):
     """Convert from fitness score to probability weighting"""
-
     return int(round(fitness*m + b))
 
 def reproduce(parent1, parent2):
@@ -65,13 +62,15 @@ def mutate(genotype, mutation_prob=0.01, inbreeding_prob=0.5, verbose=True):
 
     return genotype
 
-def fitness_job(self, iter, i):
+def fitness_job(self, iter, i, verbose=False):
     """Fitness job to run fitness function in parallel"""
-    fname = f"../scratch/temp/temp_audio_gen_{iter}_"
-    fitness = (self.fitness_func(self.to_phenotype(self.population[i], self.duration, self.sr, fname), self.target_mfcc), self.population[i])
-    self.fitness[i] = fitness
-    #print(f"Updating individual {i}: {self.fitness[i]}")
-    return fitness
+    if verbose: print(f"iter {iter} i {i}")
+    fname = f"../tmp/temp_audio_gen_{iter}_"
+    fitness_dtw = self.fitness_func(self.to_phenotype(i, self.population[i], self.duration, self.sr, fname), self.target_features)
+    if verbose: print(f"dtw {type(fitness_dtw)} {fitness_dtw}")
+    self.fitness[i] = (fitness_dtw, self.population[i])
+    # print(f"Updating individual {i}: {self.fitness[i]}")
+    return (fitness_dtw, self.population[i])
 
 
 # genetic algorithm  ---------------------------------------------------------------------
@@ -79,7 +78,7 @@ def fitness_job(self, iter, i):
 class GeneticAlgorithm:
     """A very simple Genetic Algorithm."""
 
-    def __init__(self, target_fname):
+    def __init__(self, target_fname, verbose=False):
 
         # initialize default functions
         self.random_individual = random_individual
@@ -90,27 +89,25 @@ class GeneticAlgorithm:
         self.mutate = mutate
         self.target_fname = target_fname
         self.target_fingerprint = None
-        self.target_features = None
+        self.target_features = []
         self.sr = 44100
 
         # try to get target features
         try:
             # TODO: trim spectral featurs and duration to when sound is being produced
             sound = AudioSegment.from_file(self.target_fname, format="wav")
-
             start_trim = detect_leading_silence(sound)
             end_trim = detect_leading_silence(sound.reverse())   
             trimmed_sound = sound[start_trim:len(sound)-end_trim]
             trimmed_sound.export(out_f= "trimmed_target.wav",
                                 format = "wav")
-            #self.target_features = spectral_features("trimmed_target.wav")
             self.duration = len(trimmed_sound)*1e-3
             target_synth, self.sr = librosa.load("trimmed_target.wav")
-            self.target_mfcc = librosa.feature.mfcc(target_synth, self.sr)
-            #print(self.duration)
+            self.target_features = librosa.feature.mfcc(target_synth, self.sr)
+            if verbose: print(self.duration)
         except Exception as e:
-            #print(f'Genetic Algorithm initialization failed due to : {e}')
-            dummy = 1
+            if verbose: print(f'Genetic Algorithm initialization failed due to : {e}')
+
     def initialize_population(self, population_size=10):
         """Initialize the population."""
 
@@ -126,7 +123,7 @@ class GeneticAlgorithm:
 
 
 
-    def evolve(self, iters=10, population_size=100, init_pop=True, mutation_prob=0.01):
+    def evolve(self, iters=10, population_size=100, init_pop=True, mutation_prob=0.01, verbose=False):
         """Run the GA."""
 
         # initialize the population
@@ -149,13 +146,13 @@ class GeneticAlgorithm:
                 p.join()
 
             # adjust fitness (when using spectral features)
-            #print(f"Fitness calc done\n{self.fitness}")
+            if verbose: print(f"Fitness calc done\n{self.fitness}")
             max_fitness = max([self.fitness[i][0] for i in range(self.population_size)])
-            #print(f"Max Fitness: {max_fitness}")
+            if verbose: print(f"Max Fitness: {max_fitness}")
             for i in range(self.population_size):
                 self.fitness[i] = list(self.fitness[i])
                 self.fitness[i][0] = 1 - (self.fitness[i][0] / max_fitness)
-            #print(self.fitness)
+            if verbose: print(self.fitness)
 
             # construct mating pool of probabilities weighted by fitness score
             mating_pool = functools.reduce(lambda x,y: x+y, [[individual]*self.to_weight(score)
@@ -175,7 +172,7 @@ class GeneticAlgorithm:
             # update the population
             self.population = offspring
             self.generations += [copy.copy(self.population)]
-            #print(f'iter: {iter}')
+            if verbose: print(f'iter: {iter}')
 
         return self.population
 
