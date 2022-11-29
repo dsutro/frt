@@ -45,14 +45,17 @@ def create_spectrogram(file_name, is_target):
     plot.xlabel('Sample')
     plot.ylabel('Amplitude')
     plot.subplot(212)
-    plot.specgram(signalData,Fs=samplingFrequency, cmap='magma_r')
-    plot.xlabel('Time')
-    plot.ylabel('Frequency')
-    # save as target.png
-    plot.savefig('static/target.png')
-    plot.clf()
-    plot.cla()
-    plot.close()
+    try:
+        plot.specgram(signalData,Fs=samplingFrequency, cmap='magma_r')
+        plot.xlabel('Time')
+        plot.ylabel('Frequency')
+        # save as target.png
+        plot.savefig('static/target.png')
+        plot.clf()
+        plot.cla()
+        plot.close()
+    except:
+        pass
   if(not is_target):
     samplingFrequency, signalData = wavfile.read(file_name)
     # Plot the signal read from wav file
