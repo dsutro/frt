@@ -250,7 +250,8 @@ class GeneticAlgorithm:
             ax.set_ylabel('Individuals')
             ax.set_xlabel('Genotypes by Generation')
             ax.set_title('Generations')
-            plt.show()
+            plt.savefig('genplt.png')
+        
 
 
 def plot_genotype(genotype):

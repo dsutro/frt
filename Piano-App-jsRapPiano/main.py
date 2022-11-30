@@ -186,6 +186,7 @@ def run_ga(target_fname, generations=10, population_size=10, mutation_prob=0.05,
   return params
 
 def test_ga(target_fname, generations=10, population_size=10, mutation_prob=0.05, verbose=False):
+  """Wrapper to test GA from flask"""
   # create a genetic algorithm object
   ga = genalg.GeneticAlgorithm(target_fname)
   ga.to_phenotype = to_phenotype
@@ -193,19 +194,34 @@ def test_ga(target_fname, generations=10, population_size=10, mutation_prob=0.05
   ga.fitness_func = (fitness_fnc_dtw, fitness_fnc_euc)
   pop = ga.evolve(iters=generations, population_size=population_size, mutation_prob=mutation_prob)
 
+  # return best set of params
+  fitness = [individual[0] for individual in pop]
+  individual = fitness.index(min(fitness))
+  carrier, modulator, index1, attack, release = to_params(pop[individual], ga.duration, ga.sr)
+  params = {'carrier': carrier, 
+            'modulator': modulator, 
+            'index': index1,
+            'attack': attack,
+            'release': release,
+            'individual': individual}
   # cleanup
+  if verbose: print("Cleaning up...")
   files = glob.glob('../tmp/*/.wav', recursive=True)
   for f in files:
       try:
           os.remove(f)
       except OSError as e:
           if verbose: print("Error: %s : %s" % (f, e.strerror))
-
-  return min([individual[0] for individual in pop])
+  
+  return ga
 
 
 if __name__ == '__main__':
-  params = run_ga('../assets/sine.wav')
+  # params = run_ga('../assets/sine.wav')
+  ga = test_ga('../assets/sine.wav')
+  ga.plot_generations(all=True)
+  
+
   # print(params)
 
   
