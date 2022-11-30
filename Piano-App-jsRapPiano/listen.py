@@ -1,5 +1,6 @@
 import librosa
-# import essentia
+import essentia
+from essentia import standard
 import numpy as np
 from pydub import AudioSegment
 

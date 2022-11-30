@@ -15,8 +15,8 @@ import numpy as np
 from dtw import dtw
 from numpy.linalg import norm
 from scipy.io.wavfile import write
-from scipy.io import wavfile
 import soundfile as sf
+from listen import spectral_features
 import pytest
 import glob
 import os
@@ -131,6 +131,24 @@ def to_params(genotype, duration, sr):
 
         return carrier, modulator, index1, attack, release
 
+def fitness_fnc_euc(synth_fname, target_features):
+  # euc_fnc = lambda x, y: (x**2 - y**2)
+  euc_fnc = lambda x, y: math.sqrt(sum([(xx - yy)**2 for xx, yy in zip(x, y)]))
+  synth_features = spectral_features(synth_fname)
+
+  score = 0
+  # for key in target_features.keys():
+  for key in ['lowlevel.spectral_centroid', 'lowlevel.spectral_energy', 'lowlevel.spectral_kurtosis', 'lowlevel.spectral_rms']:
+    cut_i = min(len(synth_features[key]), len(target_features[key]))
+    # TODO: penalize len diff
+    # len_dif = max(len(synth_features), len(target_features)) - min(len(synth_features), len(target_features))
+
+    score += euc_fnc(target_features[key][:cut_i], synth_features[key][:cut_i])
+
+  score = (score / len(target_features.keys()))
+  # print(score)
+  return score
+
 def fitness_fnc_dtw(synth_fname, target_mfcc):
   synth, sr = librosa.load(synth_fname)
   synth_mfcc = librosa.feature.mfcc(synth, sr)
@@ -143,7 +161,7 @@ def run_ga(target_fname, generations=10, population_size=10, mutation_prob=0.05,
   ga = genalg.GeneticAlgorithm(target_fname)
   ga.to_phenotype = to_phenotype
   ga.random_individual = random_individual
-  ga.fitness_func = fitness_fnc_dtw
+  ga.fitness_func = (fitness_fnc_dtw, fitness_fnc_euc)
   pop = ga.evolve(iters=generations, population_size=population_size, mutation_prob=mutation_prob)
 
   # return best set of params
@@ -156,7 +174,6 @@ def run_ga(target_fname, generations=10, population_size=10, mutation_prob=0.05,
             'attack': attack,
             'release': release,
             'individual': individual}
-
   # cleanup
   if verbose: print("Cleaning up...")
   files = glob.glob('../tmp/*/.wav', recursive=True)
@@ -173,7 +190,7 @@ def test_ga(target_fname, generations=10, population_size=10, mutation_prob=0.05
   ga = genalg.GeneticAlgorithm(target_fname)
   ga.to_phenotype = to_phenotype
   ga.random_individual = random_individual
-  ga.fitness_func = fitness_fnc_dtw
+  ga.fitness_func = (fitness_fnc_dtw, fitness_fnc_euc)
   pop = ga.evolve(iters=generations, population_size=population_size, mutation_prob=mutation_prob)
 
   # cleanup
@@ -189,7 +206,6 @@ def test_ga(target_fname, generations=10, population_size=10, mutation_prob=0.05
 
 if __name__ == '__main__':
   params = run_ga('../assets/sine.wav')
-  print('Done!')
   # print(params)
 
   

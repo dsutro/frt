@@ -66,11 +66,14 @@ def fitness_job(self, iter, i, verbose=False):
     """Fitness job to run fitness function in parallel"""
     if verbose: print(f"iter {iter} i {i}")
     fname = f"../tmp/temp_audio_gen_{iter}_"
-    fitness_dtw = self.fitness_func(self.to_phenotype(i, self.population[i], self.duration, self.sr, fname), self.target_features)
+    print(self.population[i])
+    fitness_dtw = self.fitness_func[0](self.to_phenotype(i, self.population[i], self.duration, self.sr, fname), self.target_mfcc)
+    fitness_euc = self.fitness_func[1](self.to_phenotype(i, self.population[i], self.duration, self.sr, fname), self.target_features)
     if verbose: print(f"dtw {type(fitness_dtw)} {fitness_dtw}")
-    self.fitness[i] = (fitness_dtw, self.population[i])
+    if verbose: print(f"euc {type(fitness_euc)} {fitness_euc}")
+    self.fitness[i] = ((fitness_dtw + fitness_euc) / 2, self.population[i])
     # print(f"Updating individual {i}: {self.fitness[i]}")
-    return (fitness_dtw, self.population[i])
+    return ((fitness_dtw + fitness_euc) / 2, self.population[i])
 
 
 # genetic algorithm  ---------------------------------------------------------------------
@@ -89,7 +92,6 @@ class GeneticAlgorithm:
         self.mutate = mutate
         self.target_fname = target_fname
         self.target_fingerprint = None
-        self.target_features = []
         self.sr = 44100
 
         # try to get target features
@@ -103,10 +105,11 @@ class GeneticAlgorithm:
                                 format = "wav")
             self.duration = len(trimmed_sound)*1e-3
             target_synth, self.sr = librosa.load("trimmed_target.wav")
-            self.target_features = librosa.feature.mfcc(target_synth, self.sr)
+            self.target_features = spectral_features("trimmed_target.wav")
+            self.target_mfcc = librosa.feature.mfcc(target_synth, self.sr)
             if verbose: print(self.duration)
         except Exception as e:
-            if verbose: print(f'Genetic Algorithm initialization failed due to : {e}')
+            print(f'Genetic Algorithm initialization failed due to : {e}')
 
     def initialize_population(self, population_size=10):
         """Initialize the population."""
