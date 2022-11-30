@@ -77,7 +77,7 @@ piano.addEventListener("mousedown", e => {
 		$('#dis-user-oct').html(userOctave);
 	}
 	if(e.target.getAttribute('id') === 'x'){
-		if (userOctave < 6){
+		if (userOctave < 9){
 			userOctave++;
 		}
 		$('#dis-user-oct').html(userOctave);
@@ -159,7 +159,7 @@ document.addEventListener("keydown", e => {
 		return;
 	case "x":
 		document.getElementById("x").classList.add("active");
-		if (userOctave < 5){
+		if (userOctave < 9){
 			userOctave++;
 		}
 		$('#dis-user-oct').html(userOctave);

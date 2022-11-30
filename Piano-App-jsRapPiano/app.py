@@ -45,16 +45,15 @@ def upload_file():
       file_number.seek(0)
       file_number.write(str(num+1))
       file_number.close()
-      fname = "file_{}.wav".format(num)
+      fname = "file_{}.mp3".format(num)
       f.save(os.path.join('static', 'mp3files', secure_filename(fname)))
       pth = "static/mp3files/" + fname
       shutil.copy(pth,'static/mp3files/file_0.mp3')
-      source_sound = pth
-      #print(pth)
-      create_spectrogram(pth, True)
+      print(pth)
       final_dict = run_ga(pth)
+      
 
-      #print(final_dict)
+      print(final_dict)
       backendHarmonicity = final_dict["modulator"]/final_dict["carrier"]
       params = {
         "harmonicity" : backendHarmonicity ,
@@ -73,7 +72,7 @@ def upload_file():
         "individual" : final_dict["individual"]
       }
       resynthesized_sound = "../tmp/temp_audio_gen_9_" + str(params["individual"]) + ".wav"
-
+      create_spectrogram("trimmed_target.wav", True)
       create_spectrogram(resynthesized_sound, False)
 
       return render_template("index.html",params=params)
