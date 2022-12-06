@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+
+<head>
+<title>
+    Resources
+</title>
+<link rel="stylesheet" href="{{ url_for('static',filename='index.css') }}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="logo">
+		<img src="{{url_for('static', filename='logo-no-background.png')}}" alt="specto1" />
+	</div>
+	<div class="navbar">
+		<a href="./">Home</a>
+		<a href="{{url_for('static',filename='contributors.html') }}">Contributors</a>
+		<a href="{{url_for('static',filename='resources.html') }}">Resources</a>
+	</div>
+    <p>
+        "This is a test resources"
+    </p>
+</body>
+
+</html>

@@ -12,11 +12,7 @@
 	<link rel="stylesheet" href="{{ url_for('static',filename='piano.css') }}" />
 	<link rel="stylesheet" href="{{ url_for('static',filename='index.css') }}" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<!-- <script>
-	</script> -->
 </head>
-
-</html>
 
 <body>
 	<div class="loader-wrapper" id="lwrap">
@@ -27,22 +23,15 @@
 	</div>
 	<div class="navbar">
 		<a href="./">Home</a>
-		<a href="#contributors">Contributors</a>
-		<a href="#resources">Recources</a>
+		<a href="{{url_for('static',filename='contributors.html') }}">Contributors</a>
+		<a href="{{url_for('static',filename='resources.html') }}">Resources</a>
 	</div>
-	<!-- <div id="divMain">
-		<div id="demo1"></div>
-		<div id="frequency"></div>
-	</div> -->
 	<div class="main">
 		<form action="http://localhost:5000/uploader" method="POST" enctype="multipart/form-data">
-			<!-- <img src ="testimage2.png" alt="specto1" width="150" height="100"/> -->
-			<!-- <img src ="{{url_for('static', filename='testimage2.png')}}" /> -->
 			<div class="row">
 				<div class="webBox">
 					<div class="directions">
 						<p>
-
 							Welcome to the FM Resynthesis Tool <br><br>
 							Start by uploading your own sound file using the upload button to the left <br>
 							Next, wait for the sound to be processes <br>
@@ -53,10 +42,7 @@
 				<div class="webBox">
 					<div class="fileSub" id="fsub">
 						<input type="file" name="file" id="upload" />
-						<input type="submit" id="suButton"/>
-						<!-- <audio id="audio" controls>
-							<source src="" id="src" />
-						</audio> -->
+						<input type="submit" id="suButton" />
 						<button type="button" id="playSound">Play Uploaded</button>
 						<script>
 							function handleFiles(event) {
@@ -66,8 +52,8 @@
 							}
 
 							$(document).ready(function () {
-							    var audioElement = document.createElement('audio');
-    							audioElement.setAttribute('src', 'static/mp3files/file_0.mp3');
+								var audioElement = document.createElement('audio');
+								audioElement.setAttribute('src', 'static/mp3files/file_0.mp3');
 								$("#playSound").click(function () {
 									audioElement.play()
 								});
@@ -77,7 +63,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="webBoximg" >
+				<div class="webBoximg">
 					<div class="oldImg">
 						<img src="{{url_for('static', filename='target.png')}}" alt="specto1" />
 					</div>

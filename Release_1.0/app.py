@@ -16,7 +16,7 @@ def index():
     os.makedirs(os.path.join(app.instance_path, 'mp3files'), exist_ok=True)
     params = {
         "harmonicity" : 3.5 ,
-        "modulationIndex" : 25 ,
+        "modulation_index" : 25 ,
         "detune" : 0 ,
         "car_type" : "sine" ,
         "amp_attack" : 0.01 ,
@@ -57,7 +57,7 @@ def upload_file():
       backendHarmonicity = final_dict["modulator"]/final_dict["carrier"]
       params = {
         "harmonicity" : backendHarmonicity ,
-        "modulationIndex" : final_dict["index"] ,
+        "modulation_index" : final_dict["index"] ,
         "detune" : 0 ,
         "car_type" : "sine" ,
         "amp_attack" : final_dict["attack"] ,

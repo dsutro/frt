@@ -3,12 +3,53 @@
 body {
     background: rgba(64, 64, 102, .5);
     font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+     align-items: center;
+     min-height: 100px;
     /* background: linear-gradient(0deg, rgba(223,102,98,0.49763655462184875) 0%, rgba(64,64,102,0.500437675070028) 100%); */
 }
 
 p {
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.contributorsDiv{
+    padding-top: 10px;
+    position: relative;
+    top: 100px;
+    text-align: center;
+    z-index: 5;
+}
+
+.name{
+    font-size: x-large;
+    font-style: bold;
+}
+
+.description{
+    font-size: medium;
+    color: rgb(62, 62, 62);
+    padding-bottom: 25px;
+}
+.resourcesDiv{
+    padding-top: 10px;
+    position: relative;
+    top: 100px;
+    text-align: center;
+    z-index: 5;
+}
+
+.source{
+    font-size: x-large;
+    font-style: bold;
+}
+
+.sourceDescription{
+    font-size: medium;
+    color: rgb(62, 62, 62);
+    padding-bottom: 25px;
 }
 
 .test {
@@ -27,18 +68,12 @@ p {
 }
 
 .navbar {
-    /* overflow: hidden; */
     background-color: #DF6662ff;
     border: #471D75ff;
     border-width: 5px;
     position: absolute;
-    /* display: inline-block; */
-    /* align-items: center; */
-    /* Set the navbar to fixed position */
     top: 0;
-    /* Position the navbar at the top of the page */
     width: 100%;
-    /* Full width */
     text-align: center;
     display: inline-block;
     z-index: 100;
@@ -56,10 +91,7 @@ p {
 
 /* Links inside the navbar */
 .navbar a {
-    /* float: center; */
     display: inline-block;
-    /* position: absolute; */
-    /* left: 300px; */
     color: #FFFFFFff;
     text-align: center;
     padding: 20px 26px;
@@ -89,10 +121,6 @@ p {
 
 .webBox {
     width: 350px;
-    /* display: flex; */
-    /* flex: 1; */
-    /* margin-right: 15px;
-    margin-left: 15px; */
     height: 200px;
     border-radius: 5px;
     border: 1px solid black;
@@ -100,10 +128,6 @@ p {
 
 .webBoximg {
     width: 350px;
-    /* display: flex; */
-    /* flex: 1; */
-    /* margin-right: 15px;
-    margin-left: 15px; */
     background-color: white;
     z-index: -2;
     height: 200px;
@@ -118,6 +142,7 @@ p {
 .webBox:nth-child(even) {
     margin-left: 15px;
 }
+
 .webBoximg:nth-child(odd) {
     margin-right: 15px;
 }
@@ -127,7 +152,6 @@ p {
 }
 
 .directions {
-    /* display: flex; */
     border-radius: 2px;
     background-color: #fffcdd;
     width: 100%;
@@ -142,7 +166,6 @@ p {
     height: 100%;
     display: flex;
     flex-wrap: wrap;
-    /* z-index: ; */
 }
 
 /* audio play button style */
@@ -171,26 +194,18 @@ audio:focus {
     padding: 0.5em;
     border: thin solid grey;
     border-radius: 3px;
-    /* position: relative;
-    left: 25px; */
     cursor: pointer;
 }
 
 
 .oldImg {
-    /* float: left; */
-    /* display: flex;
-    flex-wrap: wrap; */
     background-color: white;
     position: relative;
     z-index: -1;
 }
 
 .newImg {
-    /* display: flex;
-    flex-wrap: wrap; */
     position: relative;
-
     z-index: -1;
 }
 
@@ -248,7 +263,6 @@ input[type=submit] {
     justify-content: center;
     align-items: center;
     z-index: 99;
-    /* display: none; */
 }
 
 .loader {
