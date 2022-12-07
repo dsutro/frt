@@ -148,7 +148,7 @@ def run_ga(target_fname, generations=10, population_size=10, mutation_prob=0.05,
 
   # return best set of params
   fitness = [individual[0] for individual in pop]
-  individual = fitness.index(min(fitness))
+  individual = fitness.index(max(fitness))
   carrier, modulator, index1, attack, release = to_params(pop[individual], ga.duration, ga.sr)
   params = {'carrier': carrier, 
             'modulator': modulator, 
