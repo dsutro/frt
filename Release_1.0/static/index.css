@@ -5,8 +5,8 @@ body {
     font-family: 'Roboto', sans-serif;
     display: flex;
     justify-content: center;
-     align-items: center;
-     min-height: 100px;
+    align-items: center;
+    min-height: 100px;
     /* background: linear-gradient(0deg, rgba(223,102,98,0.49763655462184875) 0%, rgba(64,64,102,0.500437675070028) 100%); */
 }
 
@@ -15,7 +15,7 @@ p {
     padding-right: 10px;
 }
 
-.contributorsDiv{
+.contributorsDiv {
     padding-top: 10px;
     position: relative;
     top: 100px;
@@ -23,17 +23,18 @@ p {
     z-index: 5;
 }
 
-.name{
+.name {
     font-size: x-large;
     font-style: bold;
 }
 
-.description{
+.description {
     font-size: medium;
     color: rgb(62, 62, 62);
     padding-bottom: 25px;
 }
-.resourcesDiv{
+
+.resourcesDiv {
     padding-top: 10px;
     position: relative;
     top: 100px;
@@ -41,12 +42,12 @@ p {
     z-index: 5;
 }
 
-.source{
+.source {
     font-size: x-large;
     font-style: bold;
 }
 
-.sourceDescription{
+.sourceDescription {
     font-size: medium;
     color: rgb(62, 62, 62);
     padding-bottom: 25px;
